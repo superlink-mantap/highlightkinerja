@@ -686,48 +686,47 @@ const now=new Date(), year=now.getFullYear(), mIdx=now.getMonth();
 const mCurr=MONTHS[mIdx], mPrev=MONTHS[mIdx===0?11:mIdx-1];
 
 const DEFAULTS={
-  // Password default (belum diganti): admin123456 — hash disimpan, bukan teks asli
-  passwordHash:'ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78',
-  // Password admin default (belum diganti): admin123456
-  adminPasswordHash:'ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78',
+  // Password default aplikasi & admin (belum diganti): 12345678 — hash disimpan, bukan teks asli
+  passwordHash:'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64',
+  adminPasswordHash:'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64',
   // Recovery Key admin default (belum diganti): PEMULIHAN-ADMIN-2026
   adminRecoveryHash:'6c21910df1043d1070a950a23c2a930672b783df1884fe61db0c3ef889b8c957',
   title:'BO Kapas Krampung',
-  bio:'Dashboard 2026',
-  footer:'© '+year+' BO Kapas Krampung · Bank BRI',
-  eyebrowMonth:mIdx,
-  eyebrowYear:year,
+  bio:'',
+  footer:'© 2026 BO Kapas Krampung  - v.1.0.1',
+  eyebrowMonth:7,
+  eyebrowYear:2026,
   sections:[
     {id:'kinerja',label:'Highlight Kinerja',color:'blue',items:[
-      {name:'Quick Count Keragaan',href:'https://script.google.com/macros/s/AKfycbxtlFYohWWfk2STvcEcaPO-ZcZGWU_wSGJe5yumchn9CYwaxlhFCVAEFOh9HsPZs_jwHA/exec',icon:'chart-dots-3'},
-      {name:'Breakdown RKA',href:'https://script.google.com/macros/s/AKfycbwM5rD-CoVyMzBSWyiJHikbaVbG7n0rjqrctqrszfkYRk4JdSeQQTvTxtIwEAnQR07d/exec',icon:'report-analytics'},
-      {name:'Data Keragaan '+mCurr,href:'https://script.google.com/macros/s/AKfycbyAhrs9L1fpOUcNCpfl26IOpVfxeoIagr3UzsuUIJRrpxz5R3PbzCrwakGx27d8caz6XA/exec',icon:'calendar-stats'},
-      {name:'Data Keragaan '+mPrev,href:'https://script.google.com/macros/s/AKfycbzjDxwWhMJAF_RpC0bnHg51n8_iHqJ6GGlgbiEdT8SOBcMRjd8j4cnptS8WRTbR_iUDGg/exec',icon:'calendar-event'},
-      {name:'Skor KPI',href:'https://script.google.com/macros/s/AKfycbwz2NNb8-WVl3WXqmNeHgFXq9mLbK_if2bifAKgw3X72usQWsLV6GeHlbiPydtup6a4uA/exec',icon:'award'},
-      {name:'Market Share',href:'https://script.google.com/macros/s/AKfycbyTR0ygOLsanWjqhyBqb3A4VG8wRWvTyqilIcgpO2b1hWqFzWCnzZeqwBQFVdBHsj5KcA/exec',icon:'chart-pie'},
-      {name:'Almafact',href:'https://script.google.com/macros/s/AKfycbyD0nszfbLOCQhXzf0E3OtB880Aj1YVTZaFgNVRvrY_-2EEEaHgSc-dpjpSJJWQnyw/exec',icon:'database-search'},
-      {name:'Laba Rugi',href:'https://script.google.com/macros/s/AKfycbwFx8azgd0wguDVeVCXNUSoxTPnN3f7bYlovDNYtaUGiySa0teqh5is9zOF0_gSoEao/exec',icon:'cash'}
+      {name:'Quick Count Keragaan',href:'https://docs.google.com/spreadsheets/d/1-NpgMSGFmbo0Rn6m2aPJCvSNzELYma-tZZJv3pf4aAE/edit?usp=sharing',icon:'chart-dots-3',visible:true,locked:false},
+      {name:'Breakdown RKA',href:'https://docs.google.com/spreadsheets/d/1uyD0rFTni6WqCrskbzlwPjNgZlTM6bJP-fhrTVkMyFo/edit?usp=sharing',icon:'report-analytics',visible:true,locked:false},
+      {name:'Data Keragaan Agustus',href:'https://docs.google.com/spreadsheets/d/10Uk8zVlZJUeHzKJUHEsk6069WS4A2Hia_hQxJGJ3Xbc/edit?usp=drive_link',icon:'calendar-stats',visible:true,locked:false},
+      {name:'Data Keragaan Juli',href:'https://docs.google.com/spreadsheets/d/18V_938cFvgaEN8EbNqd7vvbSWDmh-8eAsp7ioxcvmrk/edit?usp=drive_link',icon:'calendar-event',visible:true,locked:false},
+      {name:'Skor KPI',href:'https://docs.google.com/spreadsheets/d/14G2jlAq1stA4KIyNe6PNXnVGsGczFPb8xgr5qZM8puc/edit?usp=drive_link',icon:'award',visible:true,locked:false},
+      {name:'Market Share',href:'https://drive.google.com/drive/folders/1aSDLfKfZYdosqVTxxt2bLsYgKyXhDDIQ?usp=drive_link',icon:'chart-pie',visible:true,locked:false},
+      {name:'Almafact',href:'https://drive.google.com/drive/folders/1qj1iVdQC-MzirzoQUvQhywqiX6ZGh6vA?usp=drive_link',icon:'database-search',visible:true,locked:false},
+      {name:'Laba Rugi',href:'https://docs.google.com/spreadsheets/d/1z_KvScRlEOCi0d34B7gqP-aohgPv8JqW75AW_aeDZ3o/edit?usp=drive_link',icon:'cash',visible:true,locked:false}
     ]},
     {id:'pinjaman',label:'Pinjaman',color:'teal',items:[
-      {name:'Monitoring SME',href:'https://script.google.com/macros/s/AKfycbxXx2lFzMhZJH-tsBfbb-wumEiZP0xoqQ7xToaqjAyJOOMYY7sM6rmSgTCMA7KewiPY/exec',icon:'building-skyscraper'},
-      {name:'Monitoring Mikro',href:'https://script.google.com/macros/s/AKfycbwLGKuUs_rFQDm9C9sqqZCu0CxaDhWCPs1NGOkGPnvJC7Cmej-XHilX8sfYWtcH4rXn/exec',icon:'user-dollar'},
-      {name:'Hotprospek '+mCurr,href:'https://script.google.com/macros/s/AKfycbzJhY1R4SY4VVNfD5Cn99XRsTgqASA2ueQohhtQw82-Y_xlNoqTfDGXnVcg4dBMvhRx/exec',icon:'flame'},
-      {name:'Hotprospek '+mPrev,href:'https://script.google.com/macros/s/AKfycbwYeIBomSZ5-w-BQ_qIp8kBQBIK0CmWR44_CKnsH0kkF1NvgqXBVGh_kNp6QPQNq3Ps/exec',icon:'flame'},
-      {name:'Realisasi RM',href:'https://script.google.com/macros/s/AKfycbzNDkahl8UN1TYuJ_ugM42AZfCWwO0SxIkKxesY2WEwpBQQ-LpNj4WC7aHdhMubAZDn/exec',icon:'target-arrow'},
-      {name:'Pipeline',href:'https://script.google.com/macros/s/AKfycbx_nSM2wzwouom9YS-NB4FWSGd5qFHE_qUVT6nj4FT_U06anq57ZLqfRv60p4y8R5mL/exec',icon:'git-merge'},
-      {name:'RM CRR',href:'https://script.google.com/macros/s/AKfycbwT0pLyhEt4eGs3HWZpUeDzthk31-R1zXnnuxv1XfesG6Mbj84LTt-9ITUF6M8gT-By/exec',icon:'user-star'},
-      {name:'SLIK Analyzer',href:'https://bokapaskrampung.github.io/slikanalyzer/',icon:'file-search'},
-      {name:'RK Analyzer',href:'https://bokapaskrampung.github.io/rkanalyzer/',icon:'file-analytics'}
+      {name:'Monitoring SME',href:'https://docs.google.com/spreadsheets/d/1NJmK7RJ9bZXUHGSVK_4prT2oPWUpRUXxiqqVWuhyBig/edit?usp=drive_link',icon:'building-skyscraper',visible:true,locked:false},
+      {name:'Monitoring Mikro',href:'https://docs.google.com/spreadsheets/d/1tzMSGUP4QOmzmOMupHUFhv9sIbe6XTgbqy2q2-SKk5s/edit?usp=drive_link',icon:'user-dollar',visible:true,locked:false},
+      {name:'Hotprospek Agustus',href:'https://docs.google.com/spreadsheets/d/14xj4shAZifqDRKYHZ6dbhhg6fOZBHFtL1RjiLoJ-qzA/edit?usp=drive_link',icon:'flame',visible:true,locked:false},
+      {name:'Hotprospek Juli',href:'https://docs.google.com/spreadsheets/d/1Ve0yglNFnerKlY6flRDVUmDWQKRWkR52nfps7wxM580/edit?usp=drive_link',icon:'flame',visible:true,locked:false},
+      {name:'Realisasi RM',href:'https://docs.google.com/spreadsheets/d/1k8J0iCdBqi1QF-Fx1XxnXxYNnDT7eIYpnVir4e70XRs/edit?usp=drive_link',icon:'target-arrow',visible:true,locked:false},
+      {name:'Pipeline',href:'https://docs.google.com/spreadsheets/d/1GpFniG5R26qFFRqxZaMDR1hyOWI0SBC07kF9hqLxP5Q/edit?usp=drive_link',icon:'git-merge',visible:true,locked:false},
+      {name:'RM CRR',href:'https://docs.google.com/spreadsheets/d/1y8Wyg9MrcyjPE4M-QAIcdlCAP8k2eNe-o1LrLuhf5ZU/edit?usp=drive_link',icon:'user-star',visible:true,locked:false},
+      {name:'SLIK Analyzer',href:'https://superlink-mantap.github.io/slikanalyzer/',icon:'file-search',visible:true,locked:false},
+      {name:'RK Analyzer',href:'https://superlink-mantap.github.io/rkanalyzer/',icon:'file-analytics',visible:true,locked:false}
     ]},
     {id:'simpanan',label:'Simpanan',color:'violet',items:[
-      {name:'Monitoring Simpanan',href:'https://script.google.com/macros/s/AKfycbw-VvpnWFGilSeT7hAPfuo0s-ZH9jD9swSktgs3zaot2k82ZrP9w4IrF-S0TToc586-/exec',icon:'chart-bar'},
-      {name:'Monitoring Tabungan',href:'https://script.google.com/macros/s/AKfycbwrjoYRpykGHXdVZiNaWeJf8LmU8AFOWBojtDwVZIJB-0TCGLyTn-TMuJPLdJ9SvE7jiQ/exec',icon:'pig-money'},
-      {name:'Monitoring Giro',href:'https://script.google.com/macros/s/AKfycbzkMvAE32r0CUuCyGu4W-iFN-TCXGhjXkV7Hh73Kz98JWgTf5C21mLummdJkIRS3dQs/exec',icon:'file-invoice'},
-      {name:'Monitoring Deposito',href:'https://script.google.com/macros/s/AKfycbxQoI-s1_9kNOgANx6KiLseWjbPMuzp5uXgqD3LdsCDrxuCpqg90eTsJJimWm034s-xeg/exec',icon:'lock-dollar'},
-      {name:'Simpanan Pinjaman',href:'https://script.google.com/macros/s/AKfycbyG5WmQRbBIiMRA734oi__07QN7Bfe4UUpfcnHaAf6OcMOuFtz7cslHtPBu_Yy4fska/exec',icon:'arrows-exchange'},
-      {name:'EDC',href:'https://script.google.com/macros/s/AKfycbwOS3_-djz5RwwDPYWo3fXfENYzkGjz4QYk-45SM_3CUwk1XpwL_IY7skHcitXS8Epm/exec',icon:'device-mobile-dollar'},
-      {name:'QRIS',href:'https://script.google.com/macros/s/AKfycbzgv1xJ7_nuyZB0nTYCPgEZR32FlbsQLwMK4-YLytvx_lvnhJmTV_cbtgw8geZoWWYv/exec',icon:'qrcode'},
-      {name:'QLOLA',href:'https://script.google.com/macros/s/AKfycbybzHx8r7EdzX8fZhZSHjJ85STYYeJmWvWHQV1tva0NP9qszgdgjTrcP1WsN6KsW31tFQ/exec',icon:'circle-letter-q'}
+      {name:'Monitoring Simpanan',href:'https://docs.google.com/spreadsheets/d/1oeNVIFd7KKc4BgtVCgm5ETuZsGuaNb_HD4r8p_FXfa8/edit?usp=drive_link',icon:'chart-bar',visible:true,locked:false},
+      {name:'Monitoring Tabungan',href:'https://docs.google.com/spreadsheets/d/1w6h24O4YUaFbi7SZ1pLw3im6GIeAccQm_CIms1qOpAs/edit?usp=drive_link',icon:'pig-money',visible:true,locked:false},
+      {name:'Monitoring Giro',href:'https://docs.google.com/spreadsheets/d/13W-CzluILu3SGUt3rZnQsoMfxJwX2iUrcCsJwK1rYRA/edit?usp=drive_link',icon:'file-invoice',visible:true,locked:false},
+      {name:'Monitoring Deposito',href:'https://docs.google.com/spreadsheets/d/15zsY93JwHM_1TbKv95sSXviNF5HdJFUBQcyxePrsums/edit?usp=drive_link',icon:'lock-dollar',visible:true,locked:false},
+      {name:'Simpanan Pinjaman',href:'https://docs.google.com/spreadsheets/d/1kQnhZgnDl_SJY9LgajnuL3UbB58zKiCab1OcwtFE3k4/edit?usp=drive_link',icon:'arrows-exchange',visible:true,locked:false},
+      {name:'EDC',href:'https://docs.google.com/spreadsheets/d/1iDUlNzIFkQc4qrGo6wnrtXOp3NaDqVaeY3aLnsdkHq8/edit?usp=drive_link',icon:'device-mobile-dollar',visible:true,locked:false},
+      {name:'QRIS',href:'https://docs.google.com/spreadsheets/d/1ex39LXe52LtpqUr2RWsizcmFuKrLKo0Z25XPjdOpl1c/edit?usp=drive_link',icon:'qrcode',visible:true,locked:false},
+      {name:'QLOLA',href:'https://docs.google.com/spreadsheets/d/1Ojn6hsF1kn9S7rzPTYcGPF1uLqbRvURpi1wYMUmZpic/edit?usp=drive_link',icon:'circle-letter-q',visible:true,locked:false}
     ]}
   ]
 };

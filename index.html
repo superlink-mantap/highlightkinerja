@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BO Kapas Krampung · Dashboard 2026</title>
+<title>BO Kapas Krampung</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -205,6 +205,7 @@ main{margin-top:clamp(26px,4vw,40px);}
   display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;}
 .row-btn:hover{background:var(--blue-soft);color:var(--blue);}
 .row-btn.del:hover{background:var(--danger-soft);color:var(--danger);}
+.row-btn:disabled,.btn:disabled{opacity:.32;cursor:not-allowed;pointer-events:none;transform:none;}
 .row-btn i{font-size:14px;}
 .empty-state{text-align:center;padding:32px;color:var(--text-faint);font-size:13px;}
 
@@ -494,6 +495,11 @@ main{margin-top:clamp(26px,4vw,40px);}
           <p style="font-size:11px;color:var(--text-faint);">Judul &amp; bio ini akan tampil di halaman login dan di dashboard.</p>
         </div>
         <div class="form-group">
+          <label class="form-label">Teks Tambahan Judul Tab Browser</label>
+          <input class="inp" type="text" id="settings-title-suffix" placeholder="contoh: Dashboard 2026">
+          <p style="font-size:11px;color:var(--text-faint);">Muncul di judul tab browser, format: "Judul · Teks ini" (contoh: "BO Kapas Krampung · Dashboard 2026").</p>
+        </div>
+        <div class="form-group">
           <label class="form-label">Bulan &amp; Tahun</label>
           <div style="display:flex;gap:8px;">
             <select class="inp" id="settings-month" style="flex:1;"></select>
@@ -728,10 +734,11 @@ const DEFAULTS={
   adminRecoveryHash:'6c21910df1043d1070a950a23c2a930672b783df1884fe61db0c3ef889b8c957',
   title:'BO Kapas Krampung',
   bio:'',
-  footer:'© 2026 BO Kapas Krampung  - v.1.0.1',
+  footer:'© 2026 BO Kapas Krampung  - v.1.0.0',
   eyebrowMonth:7,
   eyebrowYear:2026,
   idleTimeoutMinutes:5,
+  titleSuffix:'Dashboard 2026',
   sections:[
     {id:'kinerja',label:'Highlight Kinerja',color:'blue',items:[
       {name:'Quick Count Keragaan',href:'https://docs.google.com/spreadsheets/d/1-NpgMSGFmbo0Rn6m2aPJCvSNzELYma-tZZJv3pf4aAE/edit?usp=sharing',icon:'chart-dots-3',visible:true,locked:false},
@@ -1007,6 +1014,7 @@ async function migrateParsedData(parsed){
   if(typeof parsed.eyebrowMonth!=='number'||parsed.eyebrowMonth<0||parsed.eyebrowMonth>11) parsed.eyebrowMonth=mIdx;
   if(typeof parsed.eyebrowYear!=='number'||!parsed.eyebrowYear) parsed.eyebrowYear=year;
   if(typeof parsed.idleTimeoutMinutes!=='number'||parsed.idleTimeoutMinutes<=0) parsed.idleTimeoutMinutes=DEFAULTS.idleTimeoutMinutes;
+  if(typeof parsed.titleSuffix!=='string') parsed.titleSuffix=DEFAULTS.titleSuffix;
   // migrasi dari data lama (versi sebelumnya menyimpan password polos)
   if(typeof parsed.password==='string' && typeof parsed.passwordHash!=='string'){
     parsed.passwordHash=await sha256Hex(parsed.password);
@@ -1101,13 +1109,14 @@ function renderTexts(){
   document.getElementById('hero-title-text').textContent=appData.title;
   document.getElementById('hero-bio-text').textContent=appData.bio;
   document.getElementById('eyebrow-text').textContent=MONTHS[appData.eyebrowMonth]+' '+appData.eyebrowYear;
-  document.title=appData.title+' · Dashboard 2026';
+  document.title=appData.title+' · '+appData.titleSuffix;
   document.getElementById('footer-text').textContent=appData.footer;
 }
 function saveSettings(){
   const t=document.getElementById('settings-title').value.trim();
   const b=document.getElementById('settings-bio').value.trim();
   let ft=document.getElementById('settings-footer').value.trim();
+  const ts=document.getElementById('settings-title-suffix').value.trim();
   const mo=parseInt(document.getElementById('settings-month').value,10);
   const yr=parseInt(document.getElementById('settings-year').value,10);
   const err=document.getElementById('settings-error');
@@ -1119,6 +1128,7 @@ function saveSettings(){
   appData.title=t;
   appData.bio=b;
   appData.footer=ft;
+  appData.titleSuffix=ts||DEFAULTS.titleSuffix;
   appData.eyebrowMonth=isNaN(mo)?mIdx:mo;
   appData.eyebrowYear=yr;
   saveData();
@@ -1359,11 +1369,17 @@ function renderAdmin(){
 
   // section panels
   const sp=document.getElementById('section-panels');
-  sp.innerHTML=appData.sections.map(s=>`
+  sp.innerHTML=appData.sections.map((s,i)=>`
     <div class="admin-panel ${activeAdminTab===s.id?'active':''}" id="panel-${s.id}">
       <div class="items-toolbar">
         <h3 style="color:var(--${s.color});">${s.label}</h3>
         <div class="items-toolbar-actions">
+          <button class="btn btn-ghost btn-sm" onclick="moveSection('${s.id}',-1)" ${i===0?'disabled':''} title="Pindah bagian ke kiri">
+            <i class="ti ti-arrow-left"></i>
+          </button>
+          <button class="btn btn-ghost btn-sm" onclick="moveSection('${s.id}',1)" ${i===appData.sections.length-1?'disabled':''} title="Pindah bagian ke kanan">
+            <i class="ti ti-arrow-right"></i>
+          </button>
           <button class="btn btn-ghost btn-sm" onclick="openSectionModal('${s.id}')">
             <i class="ti ti-pencil"></i> Edit Bagian
           </button>
@@ -1386,6 +1402,12 @@ function renderAdmin(){
             <div class="item-row-url">${item.href}</div>
           </div>
           <div class="item-row-actions">
+            <button class="row-btn" onclick="moveItem('${s.id}',${idx},-1)" ${idx===0?'disabled':''} title="Pindah ke atas">
+              <i class="ti ti-chevron-up"></i>
+            </button>
+            <button class="row-btn" onclick="moveItem('${s.id}',${idx},1)" ${idx===s.items.length-1?'disabled':''} title="Pindah ke bawah">
+              <i class="ti ti-chevron-down"></i>
+            </button>
             <button class="row-btn" onclick="toggleItemVisible('${s.id}',${idx})" title="${item.visible===false?'Tampilkan di dashboard':'Sembunyikan dari dashboard'}">
               <i class="ti ti-${item.visible===false?'eye-off':'eye'}"></i>
             </button>
@@ -1414,6 +1436,7 @@ function renderAdmin(){
     monthSel.value=appData.eyebrowMonth;
     document.getElementById('settings-year').value=appData.eyebrowYear;
     document.getElementById('settings-idle-timeout').value=appData.idleTimeoutMinutes;
+    document.getElementById('settings-title-suffix').value=appData.titleSuffix;
   }
 }
 
@@ -1655,6 +1678,18 @@ function deleteItemFromModal(){
   confirmDelete(sectionId,idx);
 }
 
+function moveItem(sectionId,idx,direction){
+  const sec=appData.sections.find(s=>s.id===sectionId);
+  if(!sec) return;
+  const newIdx=idx+direction;
+  if(newIdx<0||newIdx>=sec.items.length) return;
+  const tmp=sec.items[idx];
+  sec.items[idx]=sec.items[newIdx];
+  sec.items[newIdx]=tmp;
+  saveData();
+  renderAdmin();
+}
+
 /* =============================================
    CONFIRM DELETE (menu item)
    ============================================= */
@@ -1751,6 +1786,17 @@ function doDeleteSection(sectionId){
   if(activeAdminTab===sectionId) activeAdminTab='password';
   saveData();
   closeConfirm();
+  renderAdmin();
+}
+function moveSection(sectionId,direction){
+  const idx=appData.sections.findIndex(s=>s.id===sectionId);
+  if(idx===-1) return;
+  const newIdx=idx+direction;
+  if(newIdx<0||newIdx>=appData.sections.length) return;
+  const tmp=appData.sections[idx];
+  appData.sections[idx]=appData.sections[newIdx];
+  appData.sections[newIdx]=tmp;
+  saveData();
   renderAdmin();
 }
 

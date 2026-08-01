@@ -968,36 +968,52 @@ async function syncToGitHub(){
     return;
   }
   setGhStatus(statusEl,'Menyimpan ke GitHub...','gh-status-pending');
-  try{
-    let sha;
-    const getRes=await fetch(ghApiUrl()+'?ref='+GITHUB_CONFIG.branch,{
-      headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}
-    });
-    if(getRes.ok){
-      const info=await getRes.json();
-      sha=info.sha;
-    }else if(getRes.status!==404){
-      const errJson=await getRes.json().catch(()=>({}));
-      throw new Error(errJson.message||('Gagal membaca file (status '+getRes.status+')'));
+  const maxAttempts=3;
+  for(let attempt=1;attempt<=maxAttempts;attempt++){
+    try{
+      let sha;
+      const getRes=await fetch(ghApiUrl()+'?ref='+GITHUB_CONFIG.branch+'&_='+Date.now(),{
+        headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'},
+        cache:'no-store'
+      });
+      if(getRes.ok){
+        const info=await getRes.json();
+        sha=info.sha;
+      }else if(getRes.status!==404){
+        const errJson=await getRes.json().catch(()=>({}));
+        throw new Error(errJson.message||('Gagal membaca file (status '+getRes.status+')'));
+      }
+      const body={
+        message:'Update data dashboard ('+new Date().toLocaleString('id-ID')+')',
+        content:utf8ToBase64(JSON.stringify(appData,null,2)),
+        branch:GITHUB_CONFIG.branch
+      };
+      if(sha) body.sha=sha;
+      const putRes=await fetch(ghApiUrl(),{
+        method:'PUT',
+        headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+        body:JSON.stringify(body),
+        cache:'no-store'
+      });
+      if(!putRes.ok){
+        const errJson=await putRes.json().catch(()=>({}));
+        const msg=errJson.message||('Gagal menyimpan (status '+putRes.status+')');
+        const isShaConflict=putRes.status===409||putRes.status===422||/does not match|sha/i.test(msg);
+        if(isShaConflict && attempt<maxAttempts){
+          setGhStatus(statusEl,'Data di GitHub baru saja berubah, mencoba sinkron ulang... ('+attempt+'/'+maxAttempts+')','gh-status-pending');
+          await new Promise(r=>setTimeout(r,600));
+          continue; // coba lagi dengan sha terbaru
+        }
+        throw new Error(msg);
+      }
+      setGhStatus(statusEl,'Tersimpan ke GitHub ✓ — akan tampil di semua device.','gh-status-ok');
+      return;
+    }catch(e){
+      if(attempt>=maxAttempts){
+        setGhStatus(statusEl,'Gagal simpan ke GitHub: '+e.message+' (tetap tersimpan di device ini). Coba klik "Sinkron Ulang Sekarang" lagi.','gh-status-err');
+        return;
+      }
     }
-    const body={
-      message:'Update data dashboard ('+new Date().toLocaleString('id-ID')+')',
-      content:utf8ToBase64(JSON.stringify(appData,null,2)),
-      branch:GITHUB_CONFIG.branch
-    };
-    if(sha) body.sha=sha;
-    const putRes=await fetch(ghApiUrl(),{
-      method:'PUT',
-      headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
-      body:JSON.stringify(body)
-    });
-    if(!putRes.ok){
-      const errJson=await putRes.json().catch(()=>({}));
-      throw new Error(errJson.message||('Gagal menyimpan (status '+putRes.status+')'));
-    }
-    setGhStatus(statusEl,'Tersimpan ke GitHub ✓ — akan tampil di semua device.','gh-status-ok');
-  }catch(e){
-    setGhStatus(statusEl,'Gagal simpan ke GitHub: '+e.message+' (tetap tersimpan di device ini).','gh-status-err');
   }
 }
 

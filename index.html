@@ -954,7 +954,23 @@ async function migrateParsedData(parsed){
 }
 
 async function loadData(){
-  // 1. Coba ambil data terbaru dari GitHub — supaya semua device sinkron
+  // 1a. Coba ambil data terbaru lewat GitHub Contents API — dibaca langsung
+  //     dari git, tanpa jeda cache seperti di raw.githubusercontent.com
+  try{
+    const res=await fetch(ghApiUrl()+'?ref='+GITHUB_CONFIG.branch,{
+      cache:'no-store',
+      headers:{'Accept':'application/vnd.github.raw'}
+    });
+    if(res.ok){
+      const text=await res.text();
+      const parsed=JSON.parse(text);
+      const migrated=await migrateParsedData(parsed);
+      try{ localStorage.setItem(STORAGE_KEY,JSON.stringify(migrated)); }catch(e){}
+      return migrated;
+    }
+  }catch(e){ /* API gagal/limit -> coba raw.githubusercontent.com */ }
+
+  // 1b. Fallback: raw.githubusercontent.com (bisa sedikit lebih lambat update-nya)
   try{
     const res=await fetch(ghRawUrl(),{cache:'no-store'});
     if(res.ok){

@@ -15,8 +15,10 @@
       "items": [
         {
           "name": "Quick Count Keragaan",
-          "href": "https://script.google.com/macros/s/AKfycbxtlFYohWWfk2STvcEcaPO-ZcZGWU_wSGJe5yumchn9CYwaxlhFCVAEFOh9HsPZs_jwHA/exec",
-          "icon": "chart-dots-3"
+          "href": "https://docs.google.com/spreadsheets/d/1-NpgMSGFmbo0Rn6m2aPJCvSNzELYma-tZZJv3pf4aAE/edit?usp=sharing",
+          "icon": "chart-dots-3",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Breakdown RKA",

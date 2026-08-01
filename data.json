@@ -22,13 +22,17 @@
         },
         {
           "name": "Breakdown RKA",
-          "href": "https://script.google.com/macros/s/AKfycbwM5rD-CoVyMzBSWyiJHikbaVbG7n0rjqrctqrszfkYRk4JdSeQQTvTxtIwEAnQR07d/exec",
-          "icon": "report-analytics"
+          "href": "https://docs.google.com/spreadsheets/d/1uyD0rFTni6WqCrskbzlwPjNgZlTM6bJP-fhrTVkMyFo/edit?usp=sharing",
+          "icon": "report-analytics",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Data Keragaan Agustus",
-          "href": "https://script.google.com/macros/s/AKfycbyAhrs9L1fpOUcNCpfl26IOpVfxeoIagr3UzsuUIJRrpxz5R3PbzCrwakGx27d8caz6XA/exec",
-          "icon": "calendar-stats"
+          "href": "https://docs.google.com/spreadsheets/d/10Uk8zVlZJUeHzKJUHEsk6069WS4A2Hia_hQxJGJ3Xbc/edit?usp=drive_link",
+          "icon": "calendar-stats",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Data Keragaan Juli",

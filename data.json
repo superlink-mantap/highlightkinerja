@@ -24,7 +24,7 @@
           "name": "Breakdown RKA",
           "href": "https://docs.google.com/spreadsheets/d/1uyD0rFTni6WqCrskbzlwPjNgZlTM6bJP-fhrTVkMyFo/edit?usp=sharing",
           "icon": "report-analytics",
-          "visible": false,
+          "visible": true,
           "locked": false
         },
         {

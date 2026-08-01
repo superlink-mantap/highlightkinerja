@@ -120,8 +120,10 @@
         },
         {
           "name": "RM CRR",
-          "href": "https://script.google.com/macros/s/AKfycbwT0pLyhEt4eGs3HWZpUeDzthk31-R1zXnnuxv1XfesG6Mbj84LTt-9ITUF6M8gT-By/exec",
-          "icon": "user-star"
+          "href": "https://docs.google.com/spreadsheets/d/1y8Wyg9MrcyjPE4M-QAIcdlCAP8k2eNe-o1LrLuhf5ZU/edit?usp=drive_link",
+          "icon": "user-star",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "SLIK Analyzer",
@@ -142,8 +144,10 @@
       "items": [
         {
           "name": "Monitoring Simpanan",
-          "href": "https://script.google.com/macros/s/AKfycbw-VvpnWFGilSeT7hAPfuo0s-ZH9jD9swSktgs3zaot2k82ZrP9w4IrF-S0TToc586-/exec",
-          "icon": "chart-bar"
+          "href": "https://docs.google.com/spreadsheets/d/1oeNVIFd7KKc4BgtVCgm5ETuZsGuaNb_HD4r8p_FXfa8/edit?usp=drive_link",
+          "icon": "chart-bar",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Monitoring Tabungan",

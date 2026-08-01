@@ -78,20 +78,24 @@
       "items": [
         {
           "name": "Monitoring SME",
-          "href": "https://docs.google.com/spreadsheets/d/1tzMSGUP4QOmzmOMupHUFhv9sIbe6XTgbqy2q2-SKk5s/edit?usp=drive_link",
+          "href": "https://docs.google.com/spreadsheets/d/1NJmK7RJ9bZXUHGSVK_4prT2oPWUpRUXxiqqVWuhyBig/edit?usp=drive_link",
           "icon": "building-skyscraper",
           "visible": true,
           "locked": false
         },
         {
           "name": "Monitoring Mikro",
-          "href": "https://script.google.com/macros/s/AKfycbwLGKuUs_rFQDm9C9sqqZCu0CxaDhWCPs1NGOkGPnvJC7Cmej-XHilX8sfYWtcH4rXn/exec",
-          "icon": "user-dollar"
+          "href": "https://docs.google.com/spreadsheets/d/1tzMSGUP4QOmzmOMupHUFhv9sIbe6XTgbqy2q2-SKk5s/edit?usp=drive_link",
+          "icon": "user-dollar",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Hotprospek Agustus",
-          "href": "https://script.google.com/macros/s/AKfycbzJhY1R4SY4VVNfD5Cn99XRsTgqASA2ueQohhtQw82-Y_xlNoqTfDGXnVcg4dBMvhRx/exec",
-          "icon": "flame"
+          "href": "https://docs.google.com/spreadsheets/d/1NJmK7RJ9bZXUHGSVK_4prT2oPWUpRUXxiqqVWuhyBig/edit?usp=drive_link",
+          "icon": "flame",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Hotprospek Juli",

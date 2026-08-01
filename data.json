@@ -50,8 +50,10 @@
         },
         {
           "name": "Market Share",
-          "href": "https://script.google.com/macros/s/AKfycbyTR0ygOLsanWjqhyBqb3A4VG8wRWvTyqilIcgpO2b1hWqFzWCnzZeqwBQFVdBHsj5KcA/exec",
-          "icon": "chart-pie"
+          "href": "https://docs.google.com/spreadsheets/d/1vvbtiG2I0iGXa6wLxHB649Xh9B3p_KcMuKmybPqntXc/edit?usp=sharing",
+          "icon": "chart-pie",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Almafact",

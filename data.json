@@ -62,8 +62,10 @@
         },
         {
           "name": "Laba Rugi",
-          "href": "https://script.google.com/macros/s/AKfycbwFx8azgd0wguDVeVCXNUSoxTPnN3f7bYlovDNYtaUGiySa0teqh5is9zOF0_gSoEao/exec",
-          "icon": "cash"
+          "href": "https://docs.google.com/spreadsheets/d/1z_KvScRlEOCi0d34B7gqP-aohgPv8JqW75AW_aeDZ3o/edit?usp=drive_link",
+          "icon": "cash",
+          "visible": true,
+          "locked": false
         }
       ]
     },

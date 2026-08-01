@@ -220,6 +220,25 @@ main{margin-top:clamp(26px,4vw,40px);}
 .modal-footer .btn{flex:1;justify-content:center;}
 .modal-footer .btn-danger{flex:0 0 auto;}
 
+/* lock toggle (item modal) */
+.lock-toggle-row{margin-bottom:16px;padding:12px 14px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border);}
+.lock-toggle{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.lock-toggle input{position:absolute;opacity:0;width:0;height:0;}
+.lock-switch{position:relative;flex-shrink:0;width:38px;height:22px;border-radius:999px;background:var(--input-border);transition:background .15s;}
+.lock-switch::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:var(--shadow-sm);transition:transform .15s;}
+.lock-toggle input:checked + .lock-switch{background:var(--violet);}
+.lock-toggle input:checked + .lock-switch::after{transform:translateX(16px);}
+.lock-toggle-text{font-size:13px;font-weight:600;display:flex;align-items:center;gap:5px;}
+.lock-toggle-text i{font-size:15px;color:var(--violet);}
+
+/* lock badge on cards / item rows */
+.card-lock{font-size:13px;color:var(--violet);flex-shrink:0;}
+.item-row-name .ti-lock{font-size:12px;color:var(--violet);margin-right:4px;}
+.item-row-hidden{opacity:.55;}
+.item-row-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+  color:var(--text-faint);background:var(--surface-2);border:1px solid var(--border);
+  padding:1px 6px;border-radius:6px;margin-left:4px;}
+
 /* ========== CONFIRM DIALOG ========== */
 .confirm-overlay{position:fixed;inset:0;z-index:400;background:var(--modal-overlay);
   display:flex;align-items:center;justify-content:center;padding:16px;
@@ -399,6 +418,13 @@ main{margin-top:clamp(26px,4vw,40px);}
           </button>
         </div>
       </div>
+
+      <div class="pw-panel" style="margin-top:16px;">
+        <h3><i class="ti ti-lock-square-rounded" style="margin-right:6px;color:var(--violet);"></i>Password per Menu <span style="font-weight:500;color:var(--text-faint);font-size:11px;">(opsional, per item)</span></h3>
+        <p style="font-size:11.5px;color:var(--text-faint);line-height:1.5;">
+          Sejak update terbaru, password kunci menu diatur langsung per item saat Tambah/Edit Menu di masing-masing bagian (bukan satu password bersama). Buka menu yang ingin dikunci, aktifkan toggle "Kunci dengan Password", lalu isi password khusus untuk menu tersebut.
+        </p>
+      </div>
     </div>
 
     <!-- Settings Panel (title & bio) -->
@@ -467,6 +493,36 @@ main{margin-top:clamp(26px,4vw,40px);}
     <p style="font-size:11px;color:var(--text-faint);margin-bottom:4px;">
       Cari ikon di <a href="https://tabler-icons.io" target="_blank" style="color:var(--blue);">tabler-icons.io</a>, salin namanya saja.
     </p>
+
+    <div class="form-group lock-toggle-row">
+      <label class="lock-toggle">
+        <input type="checkbox" id="modal-visible">
+        <span class="lock-switch"></span>
+        <span class="lock-toggle-text"><i class="ti ti-eye"></i> Tampilkan di Dashboard</span>
+      </label>
+      <p style="font-size:11px;color:var(--text-faint);">Nonaktifkan untuk menyembunyikan menu ini dari dashboard tanpa menghapusnya.</p>
+    </div>
+
+    <div class="form-group lock-toggle-row">
+      <label class="lock-toggle">
+        <input type="checkbox" id="modal-locked" onchange="toggleModalPasswordFields()">
+        <span class="lock-switch"></span>
+        <span class="lock-toggle-text"><i class="ti ti-lock"></i> Kunci dengan Password</span>
+      </label>
+      <p style="font-size:11px;color:var(--text-faint);">Jika aktif, menu ini akan minta password khusus miliknya sendiri sebelum bisa dibuka dari dashboard.</p>
+      <div id="modal-password-fields" style="display:none;margin-top:12px;">
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label">Password Menu Ini <span id="modal-pw-hint" style="color:var(--text-faint);text-transform:none;letter-spacing:0;font-weight:500;"></span></label>
+          <div class="input-wrap">
+            <input class="inp" type="password" id="modal-item-password" placeholder="Masukkan password untuk menu ini">
+            <button class="toggle-pw" type="button" onclick="togglePw('modal-item-password','modal-item-eye')" tabindex="-1">
+              <i class="ti ti-eye" id="modal-item-eye"></i>
+            </button>
+          </div>
+          <p class="field-error" id="modal-pw-error"></p>
+        </div>
+      </div>
+    </div>
 
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeModal()">Batal</button>
@@ -562,6 +618,28 @@ main{margin-top:clamp(26px,4vw,40px);}
   </div>
 </div>
 
+<!-- ========== LOCKED MENU PASSWORD MODAL ========== -->
+<div class="modal-overlay" id="lock-overlay" onclick="lockModalBgClick(event)">
+  <div class="modal-box" style="max-width:340px;text-align:center;">
+    <div class="login-badge" style="background:var(--violet-soft);">
+      <i class="ti ti-lock" style="color:var(--violet);"></i>
+    </div>
+    <h3 class="modal-title" style="margin-bottom:6px;">Menu Terkunci</h3>
+    <p style="font-size:12.5px;color:var(--text-dim);margin-bottom:16px;line-height:1.5;">Masukkan password menu untuk membuka <b id="lock-item-name">menu ini</b>.</p>
+    <div class="input-wrap" style="text-align:left;">
+      <input class="inp" type="password" id="lock-pw-input" placeholder="Masukkan password menu">
+      <button class="toggle-pw" type="button" onclick="togglePw('lock-pw-input','lock-eye-icon')" tabindex="-1">
+        <i class="ti ti-eye" id="lock-eye-icon"></i>
+      </button>
+    </div>
+    <p class="field-error" id="lock-pw-error" style="text-align:left;margin-top:6px;"></p>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeLockModal()">Batal</button>
+      <button class="btn btn-primary" onclick="submitLockPassword()"><i class="ti ti-lock-open"></i> Buka</button>
+    </div>
+  </div>
+</div>
+
 <script>
 /* =============================================
    DEFAULT DATA
@@ -637,6 +715,63 @@ function randomRecoveryKey(){
   }
   return key;
 }
+function escAttr(s){
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+/* =============================================
+   LOCKED MENU (password per item)
+   ============================================= */
+let _pendingLock=null; // {sectionId, idx, href}
+function getUnlockedSet(){
+  try{ return JSON.parse(sessionStorage.getItem('bkk_unlocked_items')||'[]'); }catch(e){ return []; }
+}
+function isItemUnlocked(key){
+  return getUnlockedSet().includes(key);
+}
+function markItemUnlocked(key){
+  const set=getUnlockedSet();
+  if(!set.includes(key)){ set.push(key); sessionStorage.setItem('bkk_unlocked_items',JSON.stringify(set)); }
+}
+function requestUnlock(el){
+  const sectionId=el.getAttribute('data-section');
+  const idx=parseInt(el.getAttribute('data-idx'),10);
+  const item=appData.sections.find(s=>s.id===sectionId).items[idx];
+  const key=sectionId+'::'+idx;
+  if(isItemUnlocked(key)){
+    window.open(item.href,'_blank');
+    return;
+  }
+  _pendingLock={sectionId,idx,href:item.href,key};
+  document.getElementById('lock-item-name').textContent=item.name;
+  document.getElementById('lock-pw-input').value='';
+  document.getElementById('lock-pw-error').classList.remove('show');
+  document.getElementById('lock-overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('lock-pw-input').focus(),80);
+}
+function closeLockModal(){
+  document.getElementById('lock-overlay').classList.remove('open');
+}
+function lockModalBgClick(e){
+  if(e.target===document.getElementById('lock-overlay')) closeLockModal();
+}
+async function submitLockPassword(){
+  if(!_pendingLock) return;
+  const val=document.getElementById('lock-pw-input').value;
+  const err=document.getElementById('lock-pw-error');
+  err.classList.remove('show');
+  if(!val){err.textContent='Password tidak boleh kosong.';err.classList.add('show');return;}
+  const item=appData.sections.find(s=>s.id===_pendingLock.sectionId).items[_pendingLock.idx];
+  const hash=await sha256Hex(val);
+  if(item&&hash===item.passwordHash){
+    markItemUnlocked(_pendingLock.key);
+    closeLockModal();
+    window.open(_pendingLock.href,'_blank');
+  }else{
+    err.textContent='Password salah. Coba lagi.';
+    err.classList.add('show');
+  }
+}
 
 /* =============================================
    DATA LAYER
@@ -693,6 +828,7 @@ function saveData(){
   if(sessionStorage.getItem('bkk_auth')==='1') showMain();
   document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
   document.getElementById('admin-pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')doAdminLogin();});
+  document.getElementById('lock-pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')submitLockPassword();});
 })();
 
 /* =============================================
@@ -847,15 +983,18 @@ function hide(id){document.getElementById(id).style.display='none';}
    ============================================= */
 const COLOR_MAP={blue:'blue',teal:'teal',violet:'violet'};
 function renderMain(){
+  // only sections that have at least one visible item show up on the dashboard
+  const visibleSections=appData.sections.filter(s=>s.items.some(it=>it.visible!==false));
+
   // quicknav
   const nav=document.getElementById('quicknav');
-  nav.innerHTML=appData.sections.map(s=>
+  nav.innerHTML=visibleSections.map(s=>
     `<a class="pill pill-${s.color}" href="#${s.id}">${s.label}</a>`
   ).join('');
 
   // sections
   const main=document.getElementById('main-sections');
-  main.innerHTML=appData.sections.map(s=>`
+  main.innerHTML=visibleSections.map(s=>`
     <section id="${s.id}" class="section">
       <div class="section-head">
         <span class="dot dot-${s.color}"></span>
@@ -863,15 +1002,18 @@ function renderMain(){
         <span class="hairline"></span>
       </div>
       <div class="grid" id="grid-${s.id}">
-        ${s.items.map(item=>`
-          <a class="card" href="${item.href}" target="_blank" rel="noopener">
+        ${s.items.map((item,idx)=>{
+          if(item.visible===false) return '';
+          return `
+          <a class="card" ${item.locked?`href="javascript:void(0)" onclick="requestUnlock(this)"`:`href="${item.href}" target="_blank" rel="noopener"`} data-section="${s.id}" data-idx="${idx}">
             <span class="card-icon" style="background:var(--${s.color}-soft);">
               <i class="ti ti-${item.icon}" style="color:var(--${s.color});"></i>
             </span>
             <span class="card-name">${item.name}</span>
-            <span class="card-arrow">↗</span>
+            ${item.locked?'<span class="card-lock"><i class="ti ti-lock"></i></span>':'<span class="card-arrow">↗</span>'}
           </a>
-        `).join('')}
+        `;
+        }).join('')}
       </div>
     </section>
   `).join('');
@@ -918,15 +1060,18 @@ function renderAdmin(){
       </div>
       ${s.items.length===0?`<div class="empty-state"><i class="ti ti-inbox" style="font-size:28px;display:block;margin-bottom:8px;"></i>Belum ada menu</div>`:''}
       ${s.items.map((item,idx)=>`
-        <div class="item-row">
+        <div class="item-row${item.visible===false?' item-row-hidden':''}">
           <div class="item-row-icon" style="background:var(--${s.color}-soft);">
             <i class="ti ti-${item.icon}" style="color:var(--${s.color});"></i>
           </div>
           <div class="item-row-info">
-            <div class="item-row-name">${item.name}</div>
+            <div class="item-row-name">${item.locked?'<i class="ti ti-lock"></i>':''}${item.name}${item.visible===false?' <span class="item-row-badge">Disembunyikan</span>':''}</div>
             <div class="item-row-url">${item.href}</div>
           </div>
           <div class="item-row-actions">
+            <button class="row-btn" onclick="toggleItemVisible('${s.id}',${idx})" title="${item.visible===false?'Tampilkan di dashboard':'Sembunyikan dari dashboard'}">
+              <i class="ti ti-${item.visible===false?'eye-off':'eye'}"></i>
+            </button>
             <button class="row-btn" onclick="openModal('${s.id}',${idx})" title="Edit">
               <i class="ti ti-pencil"></i>
             </button>
@@ -955,6 +1100,13 @@ function renderAdmin(){
 
 function switchTab(tab){
   activeAdminTab=tab;
+  renderAdmin();
+}
+
+function toggleItemVisible(sectionId,idx){
+  const item=appData.sections.find(s=>s.id===sectionId).items[idx];
+  item.visible=item.visible===false;
+  saveData();
   renderAdmin();
 }
 
@@ -1083,25 +1235,42 @@ function openModal(sectionId, idx){
   const isEdit=idx!==null;
   document.getElementById('modal-title').textContent=isEdit?'Edit Menu':'Tambah Menu';
   document.getElementById('modal-del-btn').style.display=isEdit?'':'none';
+  document.getElementById('modal-item-password').value='';
+  document.getElementById('modal-pw-error').classList.remove('show');
 
   if(isEdit){
     const item=appData.sections.find(s=>s.id===sectionId).items[idx];
     document.getElementById('modal-name').value=item.name;
     document.getElementById('modal-url').value=item.href;
     document.getElementById('modal-icon').value=item.icon;
+    document.getElementById('modal-visible').checked=item.visible!==false;
+    document.getElementById('modal-locked').checked=!!item.locked;
+    document.getElementById('modal-item-password').placeholder=item.passwordHash?'Kosongkan jika tidak ingin mengubah password':'Masukkan password untuk menu ini';
+    document.getElementById('modal-pw-hint').textContent=item.passwordHash?'(kosongkan = tetap pakai password lama)':'';
     setIconPreview(item.icon,sectionId);
   }else{
     document.getElementById('modal-name').value='';
     document.getElementById('modal-url').value='';
     document.getElementById('modal-icon').value='';
+    document.getElementById('modal-visible').checked=true;
+    document.getElementById('modal-locked').checked=false;
+    document.getElementById('modal-item-password').placeholder='Masukkan password untuk menu ini';
+    document.getElementById('modal-pw-hint').textContent='';
     setIconPreview('question-mark',sectionId);
   }
+  toggleModalPasswordFields();
   // set preview color
   const sec=appData.sections.find(s=>s.id===sectionId);
   document.getElementById('icon-preview-box').style.background='var(--'+sec.color+'-soft)';
   document.getElementById('icon-preview-el').style.color='var(--'+sec.color+')';
 
   document.getElementById('modal').classList.add('open');
+}
+
+function toggleModalPasswordFields(){
+  const on=document.getElementById('modal-locked').checked;
+  document.getElementById('modal-password-fields').style.display=on?'':'none';
+  if(!on) document.getElementById('modal-pw-error').classList.remove('show');
 }
 
 function closeModal(){
@@ -1121,18 +1290,39 @@ function setIconPreview(icon,sectionId){
   el.className='ti ti-'+icon;
 }
 
-function saveItem(){
+async function saveItem(){
   const sectionId=document.getElementById('modal-section').value;
   const idxRaw=document.getElementById('modal-idx').value;
   const name=document.getElementById('modal-name').value.trim();
   const href=document.getElementById('modal-url').value.trim();
   const icon=document.getElementById('modal-icon').value.trim()||'link';
+  const visible=document.getElementById('modal-visible').checked;
+  const locked=document.getElementById('modal-locked').checked;
+  const newPw=document.getElementById('modal-item-password').value;
+  const pwErr=document.getElementById('modal-pw-error');
+  pwErr.classList.remove('show');
   if(!name||!href){alert('Nama dan URL wajib diisi.');return;}
+
   const sec=appData.sections.find(s=>s.id===sectionId);
-  if(idxRaw===''){
-    sec.items.push({name,href,icon});
+  const existing=idxRaw===''?null:sec.items[parseInt(idxRaw)];
+  let passwordHash=existing?existing.passwordHash:undefined;
+
+  if(locked){
+    if(newPw){
+      if(newPw.length<4){pwErr.textContent='Password menu minimal 4 karakter.';pwErr.classList.add('show');return;}
+      passwordHash=await sha256Hex(newPw);
+    }else if(!passwordHash){
+      pwErr.textContent='Isi password untuk mengaktifkan kunci menu ini.';pwErr.classList.add('show');return;
+    }
   }else{
-    sec.items[parseInt(idxRaw)]={name,href,icon};
+    passwordHash=undefined;
+  }
+
+  const newItem={name,href,icon,visible,locked,passwordHash};
+  if(idxRaw===''){
+    sec.items.push(newItem);
+  }else{
+    sec.items[parseInt(idxRaw)]=newItem;
   }
   saveData();
   closeModal();

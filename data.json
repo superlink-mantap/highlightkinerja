@@ -1,0 +1,158 @@
+{
+  "passwordHash": "57f430b080ff000707e37ba41d7eb3103cc73ea66fc4d3442976246d6e9fcdac",
+  "adminPasswordHash": "ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78",
+  "adminRecoveryHash": "6c21910df1043d1070a950a23c2a930672b783df1884fe61db0c3ef889b8c957",
+  "title": "BO Kapas Krampung",
+  "bio": "",
+  "footer": "© 2026 BO Kapas Krampung · Bank BRI",
+  "eyebrowMonth": 7,
+  "eyebrowYear": 2026,
+  "sections": [
+    {
+      "id": "kinerja",
+      "label": "Highlight Kinerja",
+      "color": "blue",
+      "items": [
+        {
+          "name": "Quick Count Keragaan",
+          "href": "https://script.google.com/macros/s/AKfycbxtlFYohWWfk2STvcEcaPO-ZcZGWU_wSGJe5yumchn9CYwaxlhFCVAEFOh9HsPZs_jwHA/exec",
+          "icon": "chart-dots-3"
+        },
+        {
+          "name": "Breakdown RKA",
+          "href": "https://script.google.com/macros/s/AKfycbwM5rD-CoVyMzBSWyiJHikbaVbG7n0rjqrctqrszfkYRk4JdSeQQTvTxtIwEAnQR07d/exec",
+          "icon": "report-analytics"
+        },
+        {
+          "name": "Data Keragaan Agustus",
+          "href": "https://script.google.com/macros/s/AKfycbyAhrs9L1fpOUcNCpfl26IOpVfxeoIagr3UzsuUIJRrpxz5R3PbzCrwakGx27d8caz6XA/exec",
+          "icon": "calendar-stats"
+        },
+        {
+          "name": "Data Keragaan Juli",
+          "href": "https://script.google.com/macros/s/AKfycbzjDxwWhMJAF_RpC0bnHg51n8_iHqJ6GGlgbiEdT8SOBcMRjd8j4cnptS8WRTbR_iUDGg/exec",
+          "icon": "calendar-event"
+        },
+        {
+          "name": "Skor KPI",
+          "href": "https://script.google.com/macros/s/AKfycbwz2NNb8-WVl3WXqmNeHgFXq9mLbK_if2bifAKgw3X72usQWsLV6GeHlbiPydtup6a4uA/exec",
+          "icon": "award"
+        },
+        {
+          "name": "Market Share",
+          "href": "https://script.google.com/macros/s/AKfycbyTR0ygOLsanWjqhyBqb3A4VG8wRWvTyqilIcgpO2b1hWqFzWCnzZeqwBQFVdBHsj5KcA/exec",
+          "icon": "chart-pie"
+        },
+        {
+          "name": "Almafact",
+          "href": "https://script.google.com/macros/s/AKfycbyD0nszfbLOCQhXzf0E3OtB880Aj1YVTZaFgNVRvrY_-2EEEaHgSc-dpjpSJJWQnyw/exec",
+          "icon": "database-search"
+        },
+        {
+          "name": "Laba Rugi",
+          "href": "https://script.google.com/macros/s/AKfycbwFx8azgd0wguDVeVCXNUSoxTPnN3f7bYlovDNYtaUGiySa0teqh5is9zOF0_gSoEao/exec",
+          "icon": "cash"
+        }
+      ]
+    },
+    {
+      "id": "pinjaman",
+      "label": "Pinjaman",
+      "color": "teal",
+      "items": [
+        {
+          "name": "Monitoring SME",
+          "href": "https://script.google.com/macros/s/AKfycbxXx2lFzMhZJH-tsBfbb-wumEiZP0xoqQ7xToaqjAyJOOMYY7sM6rmSgTCMA7KewiPY/exec",
+          "icon": "building-skyscraper"
+        },
+        {
+          "name": "Monitoring Mikro",
+          "href": "https://script.google.com/macros/s/AKfycbwLGKuUs_rFQDm9C9sqqZCu0CxaDhWCPs1NGOkGPnvJC7Cmej-XHilX8sfYWtcH4rXn/exec",
+          "icon": "user-dollar"
+        },
+        {
+          "name": "Hotprospek Agustus",
+          "href": "https://script.google.com/macros/s/AKfycbzJhY1R4SY4VVNfD5Cn99XRsTgqASA2ueQohhtQw82-Y_xlNoqTfDGXnVcg4dBMvhRx/exec",
+          "icon": "flame"
+        },
+        {
+          "name": "Hotprospek Juli",
+          "href": "https://script.google.com/macros/s/AKfycbwYeIBomSZ5-w-BQ_qIp8kBQBIK0CmWR44_CKnsH0kkF1NvgqXBVGh_kNp6QPQNq3Ps/exec",
+          "icon": "flame"
+        },
+        {
+          "name": "Realisasi RM",
+          "href": "https://script.google.com/macros/s/AKfycbzNDkahl8UN1TYuJ_ugM42AZfCWwO0SxIkKxesY2WEwpBQQ-LpNj4WC7aHdhMubAZDn/exec",
+          "icon": "target-arrow"
+        },
+        {
+          "name": "Pipeline",
+          "href": "https://script.google.com/macros/s/AKfycbx_nSM2wzwouom9YS-NB4FWSGd5qFHE_qUVT6nj4FT_U06anq57ZLqfRv60p4y8R5mL/exec",
+          "icon": "git-merge"
+        },
+        {
+          "name": "RM CRR",
+          "href": "https://script.google.com/macros/s/AKfycbwT0pLyhEt4eGs3HWZpUeDzthk31-R1zXnnuxv1XfesG6Mbj84LTt-9ITUF6M8gT-By/exec",
+          "icon": "user-star"
+        },
+        {
+          "name": "SLIK Analyzer",
+          "href": "https://bokapaskrampung.github.io/slikanalyzer/",
+          "icon": "file-search"
+        },
+        {
+          "name": "RK Analyzer",
+          "href": "https://bokapaskrampung.github.io/rkanalyzer/",
+          "icon": "file-analytics"
+        }
+      ]
+    },
+    {
+      "id": "simpanan",
+      "label": "Simpanan",
+      "color": "violet",
+      "items": [
+        {
+          "name": "Monitoring Simpanan",
+          "href": "https://script.google.com/macros/s/AKfycbw-VvpnWFGilSeT7hAPfuo0s-ZH9jD9swSktgs3zaot2k82ZrP9w4IrF-S0TToc586-/exec",
+          "icon": "chart-bar"
+        },
+        {
+          "name": "Monitoring Tabungan",
+          "href": "https://script.google.com/macros/s/AKfycbwrjoYRpykGHXdVZiNaWeJf8LmU8AFOWBojtDwVZIJB-0TCGLyTn-TMuJPLdJ9SvE7jiQ/exec",
+          "icon": "pig-money"
+        },
+        {
+          "name": "Monitoring Giro",
+          "href": "https://script.google.com/macros/s/AKfycbzkMvAE32r0CUuCyGu4W-iFN-TCXGhjXkV7Hh73Kz98JWgTf5C21mLummdJkIRS3dQs/exec",
+          "icon": "file-invoice"
+        },
+        {
+          "name": "Monitoring Deposito",
+          "href": "https://script.google.com/macros/s/AKfycbxQoI-s1_9kNOgANx6KiLseWjbPMuzp5uXgqD3LdsCDrxuCpqg90eTsJJimWm034s-xeg/exec",
+          "icon": "lock-dollar"
+        },
+        {
+          "name": "Simpanan Pinjaman",
+          "href": "https://script.google.com/macros/s/AKfycbyG5WmQRbBIiMRA734oi__07QN7Bfe4UUpfcnHaAf6OcMOuFtz7cslHtPBu_Yy4fska/exec",
+          "icon": "arrows-exchange"
+        },
+        {
+          "name": "EDC",
+          "href": "https://script.google.com/macros/s/AKfycbwOS3_-djz5RwwDPYWo3fXfENYzkGjz4QYk-45SM_3CUwk1XpwL_IY7skHcitXS8Epm/exec",
+          "icon": "device-mobile-dollar"
+        },
+        {
+          "name": "QRIS",
+          "href": "https://script.google.com/macros/s/AKfycbzgv1xJ7_nuyZB0nTYCPgEZR32FlbsQLwMK4-YLytvx_lvnhJmTV_cbtgw8geZoWWYv/exec",
+          "icon": "qrcode"
+        },
+        {
+          "name": "QLOLA",
+          "href": "https://script.google.com/macros/s/AKfycbybzHx8r7EdzX8fZhZSHjJ85STYYeJmWvWHQV1tva0NP9qszgdgjTrcP1WsN6KsW31tFQ/exec",
+          "icon": "circle-letter-q"
+        }
+      ]
+    }
+  ]
+}

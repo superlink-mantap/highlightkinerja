@@ -193,8 +193,10 @@
         },
         {
           "name": "QLOLA",
-          "href": "https://script.google.com/macros/s/AKfycbybzHx8r7EdzX8fZhZSHjJ85STYYeJmWvWHQV1tva0NP9qszgdgjTrcP1WsN6KsW31tFQ/exec",
-          "icon": "circle-letter-q"
+          "href": "https://docs.google.com/spreadsheets/d/1Ojn6hsF1kn9S7rzPTYcGPF1uLqbRvURpi1wYMUmZpic/edit?usp=drive_link",
+          "icon": "circle-letter-q",
+          "visible": true,
+          "locked": false
         }
       ]
     }

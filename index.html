@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BO Kapas Krampung · Dashboard 2026</title>
-<link rel="preconnectQ" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
@@ -436,30 +436,47 @@ main{margin-top:clamp(26px,4vw,40px);}
       <div class="pw-panel" style="margin-top:16px;">
         <h3><i class="ti ti-brand-github" style="margin-right:6px;color:var(--blue);"></i>Sinkronisasi GitHub <span style="font-weight:500;color:var(--text-faint);font-size:11px;">(supaya perubahan tersimpan di semua device)</span></h3>
         <p style="font-size:11.5px;color:var(--text-faint);line-height:1.5;margin-bottom:12px;">
-          Semua device akan otomatis membaca data terbaru dari repo <b>superlink-mantap/highlightkinerja</b>. Supaya perubahan admin (password, tampilan, menu) ikut tersimpan ke repo itu, tempel token GitHub di bawah ini. Token hanya disimpan di penyimpanan lokal device ini, tidak dikirim kemana-mana selain ke GitHub.
+          Semua device akan otomatis membaca data terbaru dari repo <b>superlink-mantap/highlightkinerja</b>. Supaya perubahan admin (password, tampilan, menu) ikut tersimpan ke repo itu, tempel token GitHub di bawah ini. Token hanya disimpan di penyimpanan lokal device ini, tidak dikirim kemana-mana selain ke GitHub — sekali disimpan, tidak perlu dimasukkan ulang di device yang sama.
         </p>
         <p class="gh-status" id="gh-token-status-line"></p>
-        <div class="form-group" style="margin-top:10px;">
-          <label class="form-label">GitHub Token</label>
-          <div class="input-wrap">
-            <input class="inp" type="password" id="gh-token-input" placeholder="Tempel token GitHub (ghp_... atau github_pat_...)">
-            <button class="toggle-pw" onclick="togglePw('gh-token-input','gh-token-eye')" tabindex="-1">
-              <i class="ti ti-eye" id="gh-token-eye"></i>
+
+        <!-- Tampilan saat token SUDAH tersimpan (terkunci, hanya menampilkan status) -->
+        <div id="gh-token-locked-view" style="display:none;">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
+            <button class="btn btn-ghost btn-sm" onclick="openGhTokenEdit()">
+              <i class="ti ti-edit"></i> Ubah / Edit Token
+            </button>
+            <button class="btn btn-ghost btn-sm" onclick="syncToGitHub()">
+              <i class="ti ti-refresh"></i> Sinkron Ulang Sekarang
+            </button>
+            <button class="btn btn-danger btn-sm" onclick="clearGhToken()">
+              <i class="ti ti-trash"></i> Hapus Token dari Device Ini
             </button>
           </div>
         </div>
-        <p class="gh-status" id="gh-sync-status"></p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
-          <button class="btn btn-primary btn-sm" onclick="saveGhTokenAndTest()">
-            <i class="ti ti-plug-connected"></i> Simpan &amp; Tes Koneksi
-          </button>
-          <button class="btn btn-ghost btn-sm" onclick="syncToGitHub()">
-            <i class="ti ti-refresh"></i> Sinkron Ulang Sekarang
-          </button>
-          <button class="btn btn-danger btn-sm" onclick="clearGhToken()">
-            <i class="ti ti-trash"></i> Hapus Token dari Device Ini
-          </button>
+
+        <!-- Tampilan saat mengisi / mengubah token -->
+        <div id="gh-token-edit-view">
+          <div class="form-group" style="margin-top:10px;">
+            <label class="form-label">GitHub Token</label>
+            <div class="input-wrap">
+              <input class="inp" type="password" id="gh-token-input" placeholder="Tempel token GitHub (ghp_... atau github_pat_...)">
+              <button class="toggle-pw" onclick="togglePw('gh-token-input','gh-token-eye')" tabindex="-1">
+                <i class="ti ti-eye" id="gh-token-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
+            <button class="btn btn-primary btn-sm" onclick="saveGhTokenAndTest()">
+              <i class="ti ti-plug-connected"></i> Simpan &amp; Tes Koneksi
+            </button>
+            <button class="btn btn-ghost btn-sm" id="gh-token-cancel-btn" style="display:none;" onclick="cancelGhTokenEdit()">
+              <i class="ti ti-x"></i> Batal
+            </button>
+          </div>
         </div>
+
+        <p class="gh-status" id="gh-sync-status"></p>
       </div>
     </div>
 
@@ -865,13 +882,45 @@ function setGhStatus(el,text,cls){
   el.textContent=text;
   el.className='gh-status '+cls;
 }
+function maskToken(t){
+  if(!t) return '';
+  const tail=t.slice(-4);
+  return '••••••••••••'+tail;
+}
 function renderGhTokenUI(){
   const line=document.getElementById('gh-token-status-line');
   if(!line) return;
-  const has=!!getGhToken();
-  setGhStatus(line, has?'Status: token GitHub tersimpan di device ini ✓':'Status: belum ada token GitHub di device ini — perubahan hanya tersimpan lokal.', has?'gh-status-ok':'gh-status-warn');
+  const token=getGhToken();
+  const has=!!token;
+  const lockedView=document.getElementById('gh-token-locked-view');
+  const editView=document.getElementById('gh-token-edit-view');
+  const cancelBtn=document.getElementById('gh-token-cancel-btn');
   const inp=document.getElementById('gh-token-input');
+
+  if(has && !_ghTokenEditing){
+    setGhStatus(line, 'Status: token GitHub tersimpan di device ini ✓ ('+maskToken(token)+')', 'gh-status-ok');
+    if(lockedView) lockedView.style.display='';
+    if(editView) editView.style.display='none';
+  }else{
+    setGhStatus(line, has?'Sedang mengubah token GitHub yang tersimpan...':'Status: belum ada token GitHub di device ini — perubahan hanya tersimpan lokal.', has?'gh-status-pending':'gh-status-warn');
+    if(lockedView) lockedView.style.display='none';
+    if(editView) editView.style.display='';
+    if(cancelBtn) cancelBtn.style.display=has?'':'none';
+  }
   if(inp) inp.value='';
+}
+let _ghTokenEditing=false;
+function openGhTokenEdit(){
+  _ghTokenEditing=true;
+  renderGhTokenUI();
+  const inp=document.getElementById('gh-token-input');
+  if(inp) inp.focus();
+}
+function cancelGhTokenEdit(){
+  _ghTokenEditing=false;
+  const statusEl=document.getElementById('gh-sync-status');
+  setGhStatus(statusEl,'','gh-status-warn');
+  renderGhTokenUI();
 }
 async function saveGhTokenAndTest(){
   const inp=document.getElementById('gh-token-input');
@@ -885,6 +934,7 @@ async function saveGhTokenAndTest(){
     });
     if(res.ok || res.status===404){
       setGhToken(token);
+      _ghTokenEditing=false;
       setGhStatus(statusEl,'Token valid, tersambung ke GitHub ✓','gh-status-ok');
       renderGhTokenUI();
     }else if(res.status===401||res.status===403){
@@ -898,6 +948,7 @@ async function saveGhTokenAndTest(){
 }
 function clearGhToken(){
   setGhToken('');
+  _ghTokenEditing=false;
   const statusEl=document.getElementById('gh-sync-status');
   setGhStatus(statusEl,'Token dihapus dari device ini.','gh-status-warn');
   renderGhTokenUI();

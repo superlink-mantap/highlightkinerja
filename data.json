@@ -78,8 +78,10 @@
       "items": [
         {
           "name": "Monitoring SME",
-          "href": "https://script.google.com/macros/s/AKfycbxXx2lFzMhZJH-tsBfbb-wumEiZP0xoqQ7xToaqjAyJOOMYY7sM6rmSgTCMA7KewiPY/exec",
-          "icon": "building-skyscraper"
+          "href": "https://docs.google.com/spreadsheets/d/1tzMSGUP4QOmzmOMupHUFhv9sIbe6XTgbqy2q2-SKk5s/edit?usp=drive_link",
+          "icon": "building-skyscraper",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Monitoring Mikro",

@@ -1,0 +1,208 @@
+{
+  "passwordHash": "8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414",
+  "adminPasswordHash": "ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78",
+  "adminRecoveryHash": "5cb4aee5262fb9c14f002081afaa6bb57a573da75b70abe5cec8aa4d34e1120b",
+  "title": "BO Kapas Krampung",
+  "bio": "",
+  "footer": "© 2026 BO Kapas Krampung  - v.1.0.1",
+  "eyebrowMonth": 7,
+  "eyebrowYear": 2026,
+  "sections": [
+    {
+      "id": "kinerja",
+      "label": "Highlight Kinerja",
+      "color": "blue",
+      "items": [
+        {
+          "name": "Quick Count Keragaan",
+          "href": "https://docs.google.com/spreadsheets/d/1-NpgMSGFmbo0Rn6m2aPJCvSNzELYma-tZZJv3pf4aAE/edit?usp=sharing",
+          "icon": "chart-dots-3",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Breakdown RKA",
+          "href": "https://docs.google.com/spreadsheets/d/1uyD0rFTni6WqCrskbzlwPjNgZlTM6bJP-fhrTVkMyFo/edit?usp=sharing",
+          "icon": "report-analytics",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Data Keragaan Agustus",
+          "href": "https://docs.google.com/spreadsheets/d/10Uk8zVlZJUeHzKJUHEsk6069WS4A2Hia_hQxJGJ3Xbc/edit?usp=drive_link",
+          "icon": "calendar-stats",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Data Keragaan Juli",
+          "href": "https://docs.google.com/spreadsheets/d/18V_938cFvgaEN8EbNqd7vvbSWDmh-8eAsp7ioxcvmrk/edit?usp=drive_link",
+          "icon": "calendar-event",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Skor KPI",
+          "href": "https://docs.google.com/spreadsheets/d/14G2jlAq1stA4KIyNe6PNXnVGsGczFPb8xgr5qZM8puc/edit?usp=drive_link",
+          "icon": "award",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Market Share",
+          "href": "https://drive.google.com/drive/folders/1aSDLfKfZYdosqVTxxt2bLsYgKyXhDDIQ?usp=drive_link",
+          "icon": "chart-pie",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Almafact",
+          "href": "https://drive.google.com/drive/folders/1qj1iVdQC-MzirzoQUvQhywqiX6ZGh6vA?usp=drive_link",
+          "icon": "database-search",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Laba Rugi",
+          "href": "https://docs.google.com/spreadsheets/d/1z_KvScRlEOCi0d34B7gqP-aohgPv8JqW75AW_aeDZ3o/edit?usp=drive_link",
+          "icon": "cash",
+          "visible": true,
+          "locked": false
+        }
+      ]
+    },
+    {
+      "id": "pinjaman",
+      "label": "Pinjaman",
+      "color": "teal",
+      "items": [
+        {
+          "name": "Monitoring SME",
+          "href": "https://docs.google.com/spreadsheets/d/1NJmK7RJ9bZXUHGSVK_4prT2oPWUpRUXxiqqVWuhyBig/edit?usp=drive_link",
+          "icon": "building-skyscraper",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Monitoring Mikro",
+          "href": "https://docs.google.com/spreadsheets/d/1tzMSGUP4QOmzmOMupHUFhv9sIbe6XTgbqy2q2-SKk5s/edit?usp=drive_link",
+          "icon": "user-dollar",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Hotprospek Agustus",
+          "href": "https://docs.google.com/spreadsheets/d/14xj4shAZifqDRKYHZ6dbhhg6fOZBHFtL1RjiLoJ-qzA/edit?usp=drive_link",
+          "icon": "flame",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Hotprospek Juli",
+          "href": "https://docs.google.com/spreadsheets/d/1Ve0yglNFnerKlY6flRDVUmDWQKRWkR52nfps7wxM580/edit?usp=drive_link",
+          "icon": "flame",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Realisasi RM",
+          "href": "https://docs.google.com/spreadsheets/d/1k8J0iCdBqi1QF-Fx1XxnXxYNnDT7eIYpnVir4e70XRs/edit?usp=drive_link",
+          "icon": "target-arrow",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Pipeline",
+          "href": "https://docs.google.com/spreadsheets/d/1GpFniG5R26qFFRqxZaMDR1hyOWI0SBC07kF9hqLxP5Q/edit?usp=drive_link",
+          "icon": "git-merge",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "RM CRR",
+          "href": "https://docs.google.com/spreadsheets/d/1y8Wyg9MrcyjPE4M-QAIcdlCAP8k2eNe-o1LrLuhf5ZU/edit?usp=drive_link",
+          "icon": "user-star",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "SLIK Analyzer",
+          "href": "https://superlink-mantap.github.io/slikanalyzer/",
+          "icon": "file-search",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "RK Analyzer",
+          "href": "https://superlink-mantap.github.io/rkanalyzer/",
+          "icon": "file-analytics",
+          "visible": true,
+          "locked": false
+        }
+      ]
+    },
+    {
+      "id": "simpanan",
+      "label": "Simpanan",
+      "color": "violet",
+      "items": [
+        {
+          "name": "Monitoring Simpanan",
+          "href": "https://docs.google.com/spreadsheets/d/1oeNVIFd7KKc4BgtVCgm5ETuZsGuaNb_HD4r8p_FXfa8/edit?usp=drive_link",
+          "icon": "chart-bar",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Monitoring Tabungan",
+          "href": "https://docs.google.com/spreadsheets/d/1w6h24O4YUaFbi7SZ1pLw3im6GIeAccQm_CIms1qOpAs/edit?usp=drive_link",
+          "icon": "pig-money",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Monitoring Giro",
+          "href": "https://docs.google.com/spreadsheets/d/13W-CzluILu3SGUt3rZnQsoMfxJwX2iUrcCsJwK1rYRA/edit?usp=drive_link",
+          "icon": "file-invoice",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Monitoring Deposito",
+          "href": "https://docs.google.com/spreadsheets/d/15zsY93JwHM_1TbKv95sSXviNF5HdJFUBQcyxePrsums/edit?usp=drive_link",
+          "icon": "lock-dollar",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "Simpanan Pinjaman",
+          "href": "https://docs.google.com/spreadsheets/d/1kQnhZgnDl_SJY9LgajnuL3UbB58zKiCab1OcwtFE3k4/edit?usp=drive_link",
+          "icon": "arrows-exchange",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "EDC",
+          "href": "https://docs.google.com/spreadsheets/d/1iDUlNzIFkQc4qrGo6wnrtXOp3NaDqVaeY3aLnsdkHq8/edit?usp=drive_link",
+          "icon": "device-mobile-dollar",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "QRIS",
+          "href": "https://docs.google.com/spreadsheets/d/1ex39LXe52LtpqUr2RWsizcmFuKrLKo0Z25XPjdOpl1c/edit?usp=drive_link",
+          "icon": "qrcode",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "name": "QLOLA",
+          "href": "https://docs.google.com/spreadsheets/d/1Ojn6hsF1kn9S7rzPTYcGPF1uLqbRvURpi1wYMUmZpic/edit?usp=drive_link",
+          "icon": "circle-letter-q",
+          "visible": true,
+          "locked": false
+        }
+      ]
+    }
+  ]
+}

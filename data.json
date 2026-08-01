@@ -106,13 +106,17 @@
         },
         {
           "name": "Realisasi RM",
-          "href": "https://script.google.com/macros/s/AKfycbzNDkahl8UN1TYuJ_ugM42AZfCWwO0SxIkKxesY2WEwpBQQ-LpNj4WC7aHdhMubAZDn/exec",
-          "icon": "target-arrow"
+          "href": "https://docs.google.com/spreadsheets/d/1k8J0iCdBqi1QF-Fx1XxnXxYNnDT7eIYpnVir4e70XRs/edit?usp=drive_link",
+          "icon": "target-arrow",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Pipeline",
-          "href": "https://script.google.com/macros/s/AKfycbx_nSM2wzwouom9YS-NB4FWSGd5qFHE_qUVT6nj4FT_U06anq57ZLqfRv60p4y8R5mL/exec",
-          "icon": "git-merge"
+          "href": "https://docs.google.com/spreadsheets/d/1GpFniG5R26qFFRqxZaMDR1hyOWI0SBC07kF9hqLxP5Q/edit?usp=drive_link",
+          "icon": "git-merge",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "RM CRR",

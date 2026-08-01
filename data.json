@@ -151,18 +151,24 @@
         },
         {
           "name": "Monitoring Tabungan",
-          "href": "https://script.google.com/macros/s/AKfycbwrjoYRpykGHXdVZiNaWeJf8LmU8AFOWBojtDwVZIJB-0TCGLyTn-TMuJPLdJ9SvE7jiQ/exec",
-          "icon": "pig-money"
+          "href": "https://docs.google.com/spreadsheets/d/1w6h24O4YUaFbi7SZ1pLw3im6GIeAccQm_CIms1qOpAs/edit?usp=drive_link",
+          "icon": "pig-money",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Monitoring Giro",
-          "href": "https://script.google.com/macros/s/AKfycbzkMvAE32r0CUuCyGu4W-iFN-TCXGhjXkV7Hh73Kz98JWgTf5C21mLummdJkIRS3dQs/exec",
-          "icon": "file-invoice"
+          "href": "https://docs.google.com/spreadsheets/d/13W-CzluILu3SGUt3rZnQsoMfxJwX2iUrcCsJwK1rYRA/edit?usp=drive_link",
+          "icon": "file-invoice",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Monitoring Deposito",
-          "href": "https://script.google.com/macros/s/AKfycbxQoI-s1_9kNOgANx6KiLseWjbPMuzp5uXgqD3LdsCDrxuCpqg90eTsJJimWm034s-xeg/exec",
-          "icon": "lock-dollar"
+          "href": "https://docs.google.com/spreadsheets/d/15zsY93JwHM_1TbKv95sSXviNF5HdJFUBQcyxePrsums/edit?usp=drive_link",
+          "icon": "lock-dollar",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Simpanan Pinjaman",

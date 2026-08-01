@@ -127,8 +127,10 @@
         },
         {
           "name": "SLIK Analyzer",
-          "href": "https://bokapaskrampung.github.io/slikanalyzer/",
-          "icon": "file-search"
+          "href": "https://superlink-mantap.github.io/slikanalyzer/",
+          "icon": "file-search",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "RK Analyzer",

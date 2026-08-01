@@ -172,18 +172,24 @@
         },
         {
           "name": "Simpanan Pinjaman",
-          "href": "https://script.google.com/macros/s/AKfycbyG5WmQRbBIiMRA734oi__07QN7Bfe4UUpfcnHaAf6OcMOuFtz7cslHtPBu_Yy4fska/exec",
-          "icon": "arrows-exchange"
+          "href": "https://docs.google.com/spreadsheets/d/1kQnhZgnDl_SJY9LgajnuL3UbB58zKiCab1OcwtFE3k4/edit?usp=drive_link",
+          "icon": "arrows-exchange",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "EDC",
-          "href": "https://script.google.com/macros/s/AKfycbwOS3_-djz5RwwDPYWo3fXfENYzkGjz4QYk-45SM_3CUwk1XpwL_IY7skHcitXS8Epm/exec",
-          "icon": "device-mobile-dollar"
+          "href": "https://docs.google.com/spreadsheets/d/1iDUlNzIFkQc4qrGo6wnrtXOp3NaDqVaeY3aLnsdkHq8/edit?usp=drive_link",
+          "icon": "device-mobile-dollar",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "QRIS",
-          "href": "https://script.google.com/macros/s/AKfycbzgv1xJ7_nuyZB0nTYCPgEZR32FlbsQLwMK4-YLytvx_lvnhJmTV_cbtgw8geZoWWYv/exec",
-          "icon": "qrcode"
+          "href": "https://docs.google.com/spreadsheets/d/1ex39LXe52LtpqUr2RWsizcmFuKrLKo0Z25XPjdOpl1c/edit?usp=drive_link",
+          "icon": "qrcode",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "QLOLA",

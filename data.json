@@ -92,15 +92,17 @@
         },
         {
           "name": "Hotprospek Agustus",
-          "href": "https://docs.google.com/spreadsheets/d/1NJmK7RJ9bZXUHGSVK_4prT2oPWUpRUXxiqqVWuhyBig/edit?usp=drive_link",
+          "href": "https://docs.google.com/spreadsheets/d/14xj4shAZifqDRKYHZ6dbhhg6fOZBHFtL1RjiLoJ-qzA/edit?usp=drive_link",
           "icon": "flame",
           "visible": true,
           "locked": false
         },
         {
           "name": "Hotprospek Juli",
-          "href": "https://script.google.com/macros/s/AKfycbwYeIBomSZ5-w-BQ_qIp8kBQBIK0CmWR44_CKnsH0kkF1NvgqXBVGh_kNp6QPQNq3Ps/exec",
-          "icon": "flame"
+          "href": "https://docs.google.com/spreadsheets/d/1Ve0yglNFnerKlY6flRDVUmDWQKRWkR52nfps7wxM580/edit?usp=drive_link",
+          "icon": "flame",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Realisasi RM",

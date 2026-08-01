@@ -57,8 +57,10 @@
         },
         {
           "name": "Almafact",
-          "href": "https://script.google.com/macros/s/AKfycbyD0nszfbLOCQhXzf0E3OtB880Aj1YVTZaFgNVRvrY_-2EEEaHgSc-dpjpSJJWQnyw/exec",
-          "icon": "database-search"
+          "href": "https://drive.google.com/drive/folders/1qj1iVdQC-MzirzoQUvQhywqiX6ZGh6vA?usp=drive_link",
+          "icon": "database-search",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Laba Rugi",

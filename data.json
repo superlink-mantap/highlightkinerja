@@ -236,5 +236,6 @@
       ]
     }
   ],
-  "idleTimeoutMinutes": 5
+  "idleTimeoutMinutes": 5,
+  "titleSuffix": "Dashboard 2026"
 }

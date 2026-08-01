@@ -134,8 +134,10 @@
         },
         {
           "name": "RK Analyzer",
-          "href": "https://bokapaskrampung.github.io/rkanalyzer/",
-          "icon": "file-analytics"
+          "href": "https://superlink-mantap.github.io/rkanalyzer/",
+          "icon": "file-analytics",
+          "visible": true,
+          "locked": false
         }
       ]
     },

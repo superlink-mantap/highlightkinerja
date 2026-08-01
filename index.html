@@ -147,6 +147,13 @@ main{margin-top:clamp(26px,4vw,40px);}
 .foot{text-align:center;margin-top:34px;}
 .foot p{font-size:11px;color:var(--text-faint);font-weight:500;}
 
+/* ========== GITHUB SYNC ========== */
+.gh-status{font-size:11.5px;font-weight:600;margin-top:8px;line-height:1.5;}
+.gh-status-ok{color:var(--success);}
+.gh-status-err{color:var(--danger);}
+.gh-status-warn{color:var(--text-faint);}
+.gh-status-pending{color:var(--blue);}
+
 /* ========== ADMIN PAGE ========== */
 #admin-page{display:none;}
 #admin-page.visible{display:block;}
@@ -424,6 +431,35 @@ main{margin-top:clamp(26px,4vw,40px);}
         <p style="font-size:11.5px;color:var(--text-faint);line-height:1.5;">
           Sejak update terbaru, password kunci menu diatur langsung per item saat Tambah/Edit Menu di masing-masing bagian (bukan satu password bersama). Buka menu yang ingin dikunci, aktifkan toggle "Kunci dengan Password", lalu isi password khusus untuk menu tersebut.
         </p>
+      </div>
+
+      <div class="pw-panel" style="margin-top:16px;">
+        <h3><i class="ti ti-brand-github" style="margin-right:6px;color:var(--blue);"></i>Sinkronisasi GitHub <span style="font-weight:500;color:var(--text-faint);font-size:11px;">(supaya perubahan tersimpan di semua device)</span></h3>
+        <p style="font-size:11.5px;color:var(--text-faint);line-height:1.5;margin-bottom:12px;">
+          Semua device akan otomatis membaca data terbaru dari repo <b>superlink-mantap/highlightkinerja</b>. Supaya perubahan admin (password, tampilan, menu) ikut tersimpan ke repo itu, tempel token GitHub di bawah ini. Token hanya disimpan di penyimpanan lokal device ini, tidak dikirim kemana-mana selain ke GitHub.
+        </p>
+        <p class="gh-status" id="gh-token-status-line"></p>
+        <div class="form-group" style="margin-top:10px;">
+          <label class="form-label">GitHub Token</label>
+          <div class="input-wrap">
+            <input class="inp" type="password" id="gh-token-input" placeholder="Tempel token GitHub (ghp_... atau github_pat_...)">
+            <button class="toggle-pw" onclick="togglePw('gh-token-input','gh-token-eye')" tabindex="-1">
+              <i class="ti ti-eye" id="gh-token-eye"></i>
+            </button>
+          </div>
+        </div>
+        <p class="gh-status" id="gh-sync-status"></p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
+          <button class="btn btn-primary btn-sm" onclick="saveGhTokenAndTest()">
+            <i class="ti ti-plug-connected"></i> Simpan &amp; Tes Koneksi
+          </button>
+          <button class="btn btn-ghost btn-sm" onclick="syncToGitHub()">
+            <i class="ti ti-refresh"></i> Sinkron Ulang Sekarang
+          </button>
+          <button class="btn btn-danger btn-sm" onclick="clearGhToken()">
+            <i class="ti ti-trash"></i> Hapus Token dari Device Ini
+          </button>
+        </div>
       </div>
     </div>
 
@@ -774,40 +810,179 @@ async function submitLockPassword(){
 }
 
 /* =============================================
+   GITHUB SYNC — supaya perubahan admin tersimpan
+   dan sama di semua device
+   ============================================= */
+const GITHUB_CONFIG={
+  owner:'superlink-mantap',
+  repo:'highlightkinerja',
+  branch:'main',
+  path:'data.json'
+};
+const GH_TOKEN_KEY='bkk_gh_token';
+
+function ghRawUrl(){
+  return 'https://raw.githubusercontent.com/'+GITHUB_CONFIG.owner+'/'+GITHUB_CONFIG.repo+'/'+GITHUB_CONFIG.branch+'/'+GITHUB_CONFIG.path+'?t='+Date.now();
+}
+function ghApiUrl(){
+  return 'https://api.github.com/repos/'+GITHUB_CONFIG.owner+'/'+GITHUB_CONFIG.repo+'/contents/'+GITHUB_CONFIG.path;
+}
+function getGhToken(){
+  try{ return localStorage.getItem(GH_TOKEN_KEY)||''; }catch(e){ return ''; }
+}
+function setGhToken(t){
+  try{
+    if(t) localStorage.setItem(GH_TOKEN_KEY,t);
+    else localStorage.removeItem(GH_TOKEN_KEY);
+  }catch(e){}
+}
+function utf8ToBase64(str){
+  const bytes=new TextEncoder().encode(str);
+  let binary='';
+  bytes.forEach(b=>{ binary+=String.fromCharCode(b); });
+  return btoa(binary);
+}
+function setGhStatus(el,text,cls){
+  if(!el) return;
+  el.textContent=text;
+  el.className='gh-status '+cls;
+}
+function renderGhTokenUI(){
+  const line=document.getElementById('gh-token-status-line');
+  if(!line) return;
+  const has=!!getGhToken();
+  setGhStatus(line, has?'Status: token GitHub tersimpan di device ini ✓':'Status: belum ada token GitHub di device ini — perubahan hanya tersimpan lokal.', has?'gh-status-ok':'gh-status-warn');
+  const inp=document.getElementById('gh-token-input');
+  if(inp) inp.value='';
+}
+async function saveGhTokenAndTest(){
+  const inp=document.getElementById('gh-token-input');
+  const statusEl=document.getElementById('gh-sync-status');
+  const token=inp?inp.value.trim():'';
+  if(!token){ setGhStatus(statusEl,'Isi token terlebih dahulu.','gh-status-err'); return; }
+  setGhStatus(statusEl,'Menguji token...','gh-status-pending');
+  try{
+    const res=await fetch(ghApiUrl()+'?ref='+GITHUB_CONFIG.branch,{
+      headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}
+    });
+    if(res.ok || res.status===404){
+      setGhToken(token);
+      setGhStatus(statusEl,'Token valid, tersambung ke GitHub ✓','gh-status-ok');
+      renderGhTokenUI();
+    }else if(res.status===401||res.status===403){
+      setGhStatus(statusEl,'Token ditolak GitHub. Cek lagi token & izin akses repo-nya.','gh-status-err');
+    }else{
+      setGhStatus(statusEl,'Gagal tes koneksi (status '+res.status+').','gh-status-err');
+    }
+  }catch(e){
+    setGhStatus(statusEl,'Gagal tes koneksi: '+e.message,'gh-status-err');
+  }
+}
+function clearGhToken(){
+  setGhToken('');
+  const statusEl=document.getElementById('gh-sync-status');
+  setGhStatus(statusEl,'Token dihapus dari device ini.','gh-status-warn');
+  renderGhTokenUI();
+}
+async function syncToGitHub(){
+  const token=getGhToken();
+  const statusEl=document.getElementById('gh-sync-status');
+  if(!token){
+    setGhStatus(statusEl,'Belum tersambung ke GitHub — perubahan hanya tersimpan di device ini.','gh-status-warn');
+    return;
+  }
+  setGhStatus(statusEl,'Menyimpan ke GitHub...','gh-status-pending');
+  try{
+    let sha;
+    const getRes=await fetch(ghApiUrl()+'?ref='+GITHUB_CONFIG.branch,{
+      headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}
+    });
+    if(getRes.ok){
+      const info=await getRes.json();
+      sha=info.sha;
+    }else if(getRes.status!==404){
+      const errJson=await getRes.json().catch(()=>({}));
+      throw new Error(errJson.message||('Gagal membaca file (status '+getRes.status+')'));
+    }
+    const body={
+      message:'Update data dashboard ('+new Date().toLocaleString('id-ID')+')',
+      content:utf8ToBase64(JSON.stringify(appData,null,2)),
+      branch:GITHUB_CONFIG.branch
+    };
+    if(sha) body.sha=sha;
+    const putRes=await fetch(ghApiUrl(),{
+      method:'PUT',
+      headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+    if(!putRes.ok){
+      const errJson=await putRes.json().catch(()=>({}));
+      throw new Error(errJson.message||('Gagal menyimpan (status '+putRes.status+')'));
+    }
+    setGhStatus(statusEl,'Tersimpan ke GitHub ✓ — akan tampil di semua device.','gh-status-ok');
+  }catch(e){
+    setGhStatus(statusEl,'Gagal simpan ke GitHub: '+e.message+' (tetap tersimpan di device ini).','gh-status-err');
+  }
+}
+
+/* =============================================
    DATA LAYER
    ============================================= */
 const STORAGE_KEY='bkk_data';
 let appData;
 
+async function migrateParsedData(parsed){
+  if(typeof parsed.title!=='string') parsed.title=DEFAULTS.title;
+  if(typeof parsed.bio!=='string') parsed.bio=DEFAULTS.bio;
+  if(typeof parsed.footer!=='string') parsed.footer='© '+year+' '+parsed.title+' · Bank BRI';
+  if(typeof parsed.eyebrowMonth!=='number'||parsed.eyebrowMonth<0||parsed.eyebrowMonth>11) parsed.eyebrowMonth=mIdx;
+  if(typeof parsed.eyebrowYear!=='number'||!parsed.eyebrowYear) parsed.eyebrowYear=year;
+  // migrasi dari data lama (versi sebelumnya menyimpan password polos)
+  if(typeof parsed.password==='string' && typeof parsed.passwordHash!=='string'){
+    parsed.passwordHash=await sha256Hex(parsed.password);
+    delete parsed.password;
+  }
+  if(typeof parsed.adminPassword==='string' && typeof parsed.adminPasswordHash!=='string'){
+    parsed.adminPasswordHash=await sha256Hex(parsed.adminPassword);
+    delete parsed.adminPassword;
+  }
+  if(typeof parsed.passwordHash!=='string') parsed.passwordHash=DEFAULTS.passwordHash;
+  if(typeof parsed.adminPasswordHash!=='string') parsed.adminPasswordHash=DEFAULTS.adminPasswordHash;
+  if(typeof parsed.adminRecoveryHash!=='string') parsed.adminRecoveryHash=DEFAULTS.adminRecoveryHash;
+  if(!Array.isArray(parsed.sections)) parsed.sections=JSON.parse(JSON.stringify(DEFAULTS.sections));
+  return parsed;
+}
+
 async function loadData(){
+  // 1. Coba ambil data terbaru dari GitHub — supaya semua device sinkron
+  try{
+    const res=await fetch(ghRawUrl(),{cache:'no-store'});
+    if(res.ok){
+      const text=await res.text();
+      const parsed=JSON.parse(text);
+      const migrated=await migrateParsedData(parsed);
+      try{ localStorage.setItem(STORAGE_KEY,JSON.stringify(migrated)); }catch(e){}
+      return migrated;
+    }
+  }catch(e){ /* offline / file belum ada di repo -> lanjut ke fallback */ }
+
+  // 2. Fallback: cache lokal (localStorage) di device ini
   try{
     const raw=localStorage.getItem(STORAGE_KEY);
     if(raw){
       const parsed=JSON.parse(raw);
-      if(typeof parsed.title!=='string') parsed.title=DEFAULTS.title;
-      if(typeof parsed.bio!=='string') parsed.bio=DEFAULTS.bio;
-      if(typeof parsed.footer!=='string') parsed.footer='© '+year+' '+parsed.title+' · Bank BRI';
-      if(typeof parsed.eyebrowMonth!=='number'||parsed.eyebrowMonth<0||parsed.eyebrowMonth>11) parsed.eyebrowMonth=mIdx;
-      if(typeof parsed.eyebrowYear!=='number'||!parsed.eyebrowYear) parsed.eyebrowYear=year;
-      // migrasi dari data lama (versi sebelumnya menyimpan password polos)
-      if(typeof parsed.password==='string' && typeof parsed.passwordHash!=='string'){
-        parsed.passwordHash=await sha256Hex(parsed.password);
-        delete parsed.password;
-      }
-      if(typeof parsed.adminPassword==='string' && typeof parsed.adminPasswordHash!=='string'){
-        parsed.adminPasswordHash=await sha256Hex(parsed.adminPassword);
-        delete parsed.adminPassword;
-      }
-      if(typeof parsed.passwordHash!=='string') parsed.passwordHash=DEFAULTS.passwordHash;
-      if(typeof parsed.adminPasswordHash!=='string') parsed.adminPasswordHash=DEFAULTS.adminPasswordHash;
-      if(typeof parsed.adminRecoveryHash!=='string') parsed.adminRecoveryHash=DEFAULTS.adminRecoveryHash;
-      return parsed;
+      return await migrateParsedData(parsed);
     }
   }catch(e){}
+
+  // 3. Fallback terakhir: data bawaan
   return JSON.parse(JSON.stringify(DEFAULTS));
 }
-function saveData(){
+function saveData(opts){
   localStorage.setItem(STORAGE_KEY,JSON.stringify(appData));
+  if(!opts || opts.sync!==false){
+    syncToGitHub();
+  }
 }
 
 /* =============================================
@@ -815,7 +990,7 @@ function saveData(){
    ============================================= */
 (async function initApp(){
   appData=await loadData();
-  saveData();
+  saveData({sync:false});
 
   // theme
   const savedTheme=localStorage.getItem('bkk_theme')||'dark';
@@ -1087,6 +1262,7 @@ function renderAdmin(){
   // show/hide password & settings panels
   document.getElementById('panel-password').className='admin-panel'+(activeAdminTab==='password'?' active':'');
   document.getElementById('panel-settings').className='admin-panel'+(activeAdminTab==='settings'?' active':'');
+  renderGhTokenUI();
   if(activeAdminTab==='settings'){
     document.getElementById('settings-title').value=appData.title;
     document.getElementById('settings-bio').value=appData.bio;

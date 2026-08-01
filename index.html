@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BO Kapas Krampung</title>
+<title>BO Kapas Krampung · Dashboard 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -686,14 +686,15 @@ const now=new Date(), year=now.getFullYear(), mIdx=now.getMonth();
 const mCurr=MONTHS[mIdx], mPrev=MONTHS[mIdx===0?11:mIdx-1];
 
 const DEFAULTS={
-  // Password default aplikasi & admin (belum diganti): 12345678 — hash disimpan, bukan teks asli
-  passwordHash:'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64',
-  adminPasswordHash:'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64',
+  // Password default aplikasi (belum diganti): kpk0394 — hash disimpan, bukan teks asli
+  passwordHash:'943b2c9cc1daac77a02f7d2928c92a20d03444b02a71cb8658e83209192277ac',
+  // Password default admin (belum diganti): admin123456 — hash disimpan, bukan teks asli
+  adminPasswordHash:'ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78',
   // Recovery Key admin default (belum diganti): PEMULIHAN-ADMIN-2026
   adminRecoveryHash:'6c21910df1043d1070a950a23c2a930672b783df1884fe61db0c3ef889b8c957',
   title:'BO Kapas Krampung',
   bio:'',
-  footer:'© 2026 BO Kapas Krampung  - v.1.0.0',
+  footer:'© 2026 BO Kapas Krampung  - v.1.0.1',
   eyebrowMonth:7,
   eyebrowYear:2026,
   sections:[
@@ -1015,7 +1016,7 @@ function saveData(opts){
   renderTexts();
 
   // auth
-  if(sessionStorage.getItem('bkk_auth')==='1') showMain();
+  if(sessionStorage.getItem('bkk_auth')==='1'){ showMain(); resetIdleTimer(); }
   document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
   document.getElementById('admin-pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')doAdminLogin();});
   document.getElementById('lock-pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')submitLockPassword();});
@@ -1057,6 +1058,38 @@ function saveSettings(){
 }
 
 /* =============================================
+   AUTO LOGOUT (idle timeout)
+   ============================================= */
+const IDLE_TIMEOUT_MS = 5 * 60 * 1000; // 5 menit tanpa aktivitas -> auto logout
+let _idleTimer=null;
+function isLoggedIn(){
+  return sessionStorage.getItem('bkk_auth')==='1' || sessionStorage.getItem('bkk_admin_auth')==='1';
+}
+function resetIdleTimer(){
+  if(!isLoggedIn()) return;
+  if(_idleTimer) clearTimeout(_idleTimer);
+  _idleTimer=setTimeout(handleIdleLogout, IDLE_TIMEOUT_MS);
+}
+function stopIdleTimer(){
+  if(_idleTimer){ clearTimeout(_idleTimer); _idleTimer=null; }
+}
+function handleIdleLogout(){
+  if(!isLoggedIn()) return;
+  doLogout();
+  const err=document.getElementById('login-error');
+  if(err){
+    err.textContent='Sesi berakhir karena tidak ada aktivitas. Silakan masuk kembali.';
+    err.classList.add('show');
+  }
+}
+['mousemove','mousedown','keydown','scroll','touchstart','click'].forEach(evt=>{
+  document.addEventListener(evt, resetIdleTimer, {passive:true});
+});
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible') resetIdleTimer();
+});
+
+/* =============================================
    AUTH
    ============================================= */
 function doLogin(){
@@ -1066,6 +1099,7 @@ function doLogin(){
       sessionStorage.setItem('bkk_auth','1');
       document.getElementById('login-error').classList.remove('show');
       showMain();
+      resetIdleTimer();
     }else{
       document.getElementById('login-error').classList.add('show');
       document.getElementById('pw-input').value='';
@@ -1074,6 +1108,7 @@ function doLogin(){
   });
 }
 function doLogout(){
+  stopIdleTimer();
   sessionStorage.removeItem('bkk_auth');
   sessionStorage.removeItem('bkk_admin_auth');
   hide('topbar');hide('main-page');hide('admin-page');
@@ -1108,6 +1143,7 @@ function doAdminLogin(){
       document.getElementById('login-page').classList.add('hidden');
       show('topbar');
       enterAdmin();
+      resetIdleTimer();
     }else{
       document.getElementById('admin-login-error').classList.add('show');
       document.getElementById('admin-pw-input').value='';

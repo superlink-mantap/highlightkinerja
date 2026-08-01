@@ -36,13 +36,17 @@
         },
         {
           "name": "Data Keragaan Juli",
-          "href": "https://script.google.com/macros/s/AKfycbzjDxwWhMJAF_RpC0bnHg51n8_iHqJ6GGlgbiEdT8SOBcMRjd8j4cnptS8WRTbR_iUDGg/exec",
-          "icon": "calendar-event"
+          "href": "https://docs.google.com/spreadsheets/d/18V_938cFvgaEN8EbNqd7vvbSWDmh-8eAsp7ioxcvmrk/edit?usp=drive_link",
+          "icon": "calendar-event",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Skor KPI",
-          "href": "https://script.google.com/macros/s/AKfycbwz2NNb8-WVl3WXqmNeHgFXq9mLbK_if2bifAKgw3X72usQWsLV6GeHlbiPydtup6a4uA/exec",
-          "icon": "award"
+          "href": "https://docs.google.com/spreadsheets/d/14G2jlAq1stA4KIyNe6PNXnVGsGczFPb8xgr5qZM8puc/edit?usp=drive_link",
+          "icon": "award",
+          "visible": true,
+          "locked": false
         },
         {
           "name": "Market Share",

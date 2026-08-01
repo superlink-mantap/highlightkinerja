@@ -14,6 +14,13 @@
       "color": "blue",
       "items": [
         {
+          "name": "Quick Count Keragaan",
+          "href": "https://docs.google.com/spreadsheets/d/1-NpgMSGFmbo0Rn6m2aPJCvSNzELYma-tZZJv3pf4aAE/edit?usp=sharing",
+          "icon": "chart-dots-3",
+          "visible": true,
+          "locked": false
+        },
+        {
           "name": "Breakdown RKA",
           "href": "https://docs.google.com/spreadsheets/d/1uyD0rFTni6WqCrskbzlwPjNgZlTM6bJP-fhrTVkMyFo/edit?usp=sharing",
           "icon": "report-analytics",
@@ -24,13 +31,6 @@
           "name": "Data Keragaan Agustus",
           "href": "https://docs.google.com/spreadsheets/d/10Uk8zVlZJUeHzKJUHEsk6069WS4A2Hia_hQxJGJ3Xbc/edit?usp=drive_link",
           "icon": "calendar-stats",
-          "visible": true,
-          "locked": false
-        },
-        {
-          "name": "Quick Count Keragaan",
-          "href": "https://docs.google.com/spreadsheets/d/1-NpgMSGFmbo0Rn6m2aPJCvSNzELYma-tZZJv3pf4aAE/edit?usp=sharing",
-          "icon": "chart-dots-3",
           "visible": true,
           "locked": false
         },

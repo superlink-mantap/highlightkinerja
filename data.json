@@ -203,6 +203,12 @@
           "locked": false
         }
       ]
+    },
+    {
+      "id": "master",
+      "label": "Master",
+      "color": "blue",
+      "items": []
     }
   ],
   "idleTimeoutMinutes": 5

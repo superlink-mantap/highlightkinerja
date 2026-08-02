@@ -240,6 +240,13 @@
           "visible": true,
           "locked": true,
           "passwordHash": "ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78"
+        },
+        {
+          "name": "Tools",
+          "href": "https://superlink-mantap.github.io/mastermamm/",
+          "icon": "link",
+          "visible": true,
+          "locked": false
         }
       ]
     }

@@ -234,19 +234,19 @@
           "passwordHash": "ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78"
         },
         {
+          "name": "Tools",
+          "href": "https://superlink-mantap.github.io/mastermamm/",
+          "icon": "link",
+          "visible": true,
+          "locked": false
+        },
+        {
           "name": "IT",
           "href": "https://drive.google.com/drive/folders/1pkp30ch6_BxhcHyjzCaaqOTU0U0FPtPS?usp=sharing",
           "icon": "link",
           "visible": true,
           "locked": true,
           "passwordHash": "ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78"
-        },
-        {
-          "name": "Tools",
-          "href": "https://superlink-mantap.github.io/mastermamm/",
-          "icon": "link",
-          "visible": true,
-          "locked": false
         }
       ]
     }

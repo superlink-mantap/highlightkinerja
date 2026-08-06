@@ -251,6 +251,6 @@
       ]
     }
   ],
-  "idleTimeoutMinutes": 5,
+  "idleTimeoutMinutes": 30,
   "titleSuffix": "Mantap Djaya"
 }

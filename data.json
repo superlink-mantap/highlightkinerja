@@ -175,6 +175,13 @@
           "locked": false
         },
         {
+          "name": "Pipeline",
+          "href": "https://docs.google.com/spreadsheets/d/1hSRDCuZ-WEBVhxPVOdjOovWXyt5lyNHM3x2x1esPuKs/edit?usp=sharing",
+          "icon": "git-merge",
+          "visible": true,
+          "locked": false
+        },
+        {
           "name": "Simpanan Pinjaman",
           "href": "https://docs.google.com/spreadsheets/d/1kQnhZgnDl_SJY9LgajnuL3UbB58zKiCab1OcwtFE3k4/edit?usp=drive_link",
           "icon": "arrows-exchange",

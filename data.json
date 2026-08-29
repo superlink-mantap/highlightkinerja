@@ -175,6 +175,13 @@
               "icon": "link",
               "visible": true,
               "locked": false
+            },
+            {
+              "name": "SLIK ANALYZER",
+              "href": "https://superlink-mantap.github.io/slikanalyzer/",
+              "icon": "link",
+              "visible": true,
+              "locked": false
             }
           ]
         },

@@ -74,6 +74,13 @@
               "icon": "link",
               "visible": true,
               "locked": false
+            },
+            {
+              "name": "BO ONLY",
+              "href": "https://drive.google.com/drive/folders/1iLhMPTxOq13PQD2J9edft9GijPVAu26d?usp=drive_link",
+              "icon": "link",
+              "visible": true,
+              "locked": false
             }
           ]
         },

@@ -67,7 +67,15 @@
           "icon": "database-search",
           "visible": true,
           "locked": false,
-          "subItems": []
+          "subItems": [
+            {
+              "name": "ALL UKER",
+              "href": "https://drive.google.com/drive/folders/11EkzAuy7iBt09fBhEWiy__VoxPKJIWdN?usp=drive_link",
+              "icon": "link",
+              "visible": true,
+              "locked": false
+            }
+          ]
         },
         {
           "name": "Laba Rugi",

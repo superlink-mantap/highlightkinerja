@@ -170,15 +170,15 @@
           "locked": false,
           "subItems": [
             {
-              "name": "RK Analyzer",
-              "href": "https://superlink-mantap.github.io/rkanalyzer/",
+              "name": "SLIK Analyzer",
+              "href": "https://superlink-mantap.github.io/slikanalyzer/",
               "icon": "link",
               "visible": true,
               "locked": false
             },
             {
-              "name": "SLIK Analyzer",
-              "href": "https://superlink-mantap.github.io/slikanalyzer/",
+              "name": "RK Analyzer",
+              "href": "https://superlink-mantap.github.io/rkanalyzer/",
               "icon": "link",
               "visible": true,
               "locked": false

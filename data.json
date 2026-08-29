@@ -168,7 +168,15 @@
           "icon": "file-search",
           "visible": true,
           "locked": false,
-          "subItems": []
+          "subItems": [
+            {
+              "name": "RK Analyzer",
+              "href": "https://superlink-mantap.github.io/rkanalyzer/",
+              "icon": "link",
+              "visible": true,
+              "locked": false
+            }
+          ]
         },
         {
           "name": "RK Analyzer",

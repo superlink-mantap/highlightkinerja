@@ -292,6 +292,14 @@
               "locked": false
             },
             {
+              "name": "DAILY ACTIVITY IT",
+              "href": "https://docs.google.com/spreadsheets/d/1HbVT_gHrnPhGO66zst1GJci4duO3O1XSUms1KbP4ug0/edit?usp=drive_link",
+              "icon": "link",
+              "visible": true,
+              "locked": true,
+              "passwordHash": "ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78"
+            },
+            {
               "name": "CCTV",
               "href": "https://docs.google.com/spreadsheets/d/1Buc-2gLtBhB2pnpWDBtyqkSfKhZEkQ4dmDD1zj9Srmc/edit?usp=drive_link",
               "icon": "link",
@@ -302,14 +310,6 @@
             {
               "name": "CRM / ATM",
               "href": "https://docs.google.com/spreadsheets/d/1UC7mUTE3Pw8OjCi9xLgJapLrZNumnysnuUFtlxI1kJI/edit?usp=drive_link",
-              "icon": "link",
-              "visible": true,
-              "locked": true,
-              "passwordHash": "ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78"
-            },
-            {
-              "name": "DAILY ACTIVITY IT",
-              "href": "https://docs.google.com/spreadsheets/d/1HbVT_gHrnPhGO66zst1GJci4duO3O1XSUms1KbP4ug0/edit?usp=drive_link",
               "icon": "link",
               "visible": true,
               "locked": true,

@@ -247,6 +247,45 @@ main{margin-top:clamp(26px,4vw,40px);}
   color:var(--text-faint);background:var(--surface-2);border:1px solid var(--border);
   padding:1px 6px;border-radius:6px;margin-left:4px;}
 
+/* ========== SUB MENU (dashboard cards) ========== */
+.card-wrap{display:flex;flex-direction:column;gap:6px;}
+.card-toggle{cursor:pointer;}
+.card-chevron{display:flex;align-items:center;transition:transform .2s;}
+.card-wrap.open .card-chevron{transform:rotate(180deg);}
+.sub-list{display:none;flex-direction:column;gap:6px;padding-left:18px;
+  margin-left:16px;border-left:2px solid var(--border);}
+.card-wrap.open .sub-list{display:flex;}
+.sub-card{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;
+  background:var(--surface);border:1px solid var(--border);text-decoration:none;
+  transition:transform .15s,box-shadow .15s,background .15s;}
+.sub-card:hover{transform:translateY(-2px);background:var(--surface-2);box-shadow:var(--shadow-md);}
+.sub-card i.ti{font-size:14px;color:var(--text-dim);flex-shrink:0;}
+.sub-card-name{font-size:12px;color:var(--text);font-weight:500;flex:1;line-height:1.35;}
+.sub-card-lock{font-size:12px;color:var(--violet);flex-shrink:0;}
+
+/* ========== SUB MENU (admin panel) ========== */
+.sub-admin-panel{margin:2px 0 10px 40px;padding:10px 12px;border-radius:10px;
+  background:var(--surface-2);border:1px dashed var(--border);display:flex;flex-direction:column;gap:6px;}
+.sub-item-row{display:flex;align-items:center;gap:8px;padding:8px 10px;
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;}
+.sub-item-row-icon{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;background:var(--surface-2);}
+.sub-item-row-icon i{font-size:12px;color:var(--text-dim);}
+.sub-item-row-info{flex:1;min-width:0;}
+.sub-item-row-name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sub-item-row-url{font-size:10.5px;color:var(--text-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px;}
+.sub-item-row-actions{display:flex;gap:5px;flex-shrink:0;}
+.row-btn-sm{width:25px;height:25px;border-radius:7px;border:1px solid var(--border);
+  background:var(--surface-2);color:var(--text-dim);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;}
+.row-btn-sm:hover{background:var(--blue-soft);color:var(--blue);}
+.row-btn-sm.del:hover{background:var(--danger-soft);color:var(--danger);}
+.row-btn-sm:disabled{opacity:.32;cursor:not-allowed;pointer-events:none;}
+.row-btn-sm i{font-size:12px;}
+.empty-state-sm{text-align:center;padding:12px;color:var(--text-faint);font-size:11.5px;}
+.sub-count-badge{font-size:10px;font-weight:700;background:var(--blue-soft);color:var(--blue);
+  border-radius:999px;padding:1px 6px;margin-left:2px;}
+
 /* ========== CONFIRM DIALOG ========== */
 .confirm-overlay{position:fixed;inset:0;z-index:400;background:var(--modal-overlay);
   display:flex;align-items:center;justify-content:center;padding:16px;
@@ -548,6 +587,7 @@ main{margin-top:clamp(26px,4vw,40px);}
     <h3 class="modal-title" id="modal-title">Tambah Menu</h3>
     <input type="hidden" id="modal-section">
     <input type="hidden" id="modal-idx">
+    <input type="hidden" id="modal-parent-idx">
 
     <div class="form-group" style="margin-bottom:14px;">
       <label class="form-label">Nama Menu</label>
@@ -734,7 +774,7 @@ const DEFAULTS={
   adminRecoveryHash:'6c21910df1043d1070a950a23c2a930672b783df1884fe61db0c3ef889b8c957',
   title:'BO Kapas Krampung',
   bio:'',
-  footer:'© 2026 BO Kapas Krampung  - v.1.0.0',
+  footer:'© 2026 BO Kapas Krampung  - v.2.0.0',
   eyebrowMonth:7,
   eyebrowYear:2026,
   idleTimeoutMinutes:5,
@@ -821,12 +861,34 @@ function requestUnlock(el){
     return;
   }
   _pendingLock={sectionId,idx,href:item.href,key};
+  _pendingLockSubIdx=null;
   document.getElementById('lock-item-name').textContent=item.name;
   document.getElementById('lock-pw-input').value='';
   document.getElementById('lock-pw-error').classList.remove('show');
   document.getElementById('lock-overlay').classList.add('open');
   setTimeout(()=>document.getElementById('lock-pw-input').focus(),80);
 }
+function requestUnlockSub(el){
+  const sectionId=el.getAttribute('data-section');
+  const idx=parseInt(el.getAttribute('data-idx'),10);
+  const sidx=parseInt(el.getAttribute('data-sidx'),10);
+  const item=appData.sections.find(s=>s.id===sectionId).items[idx];
+  const sub=(item.subItems||[])[sidx];
+  if(!sub) return;
+  const key=sectionId+'::'+idx+'::sub::'+sidx;
+  if(isItemUnlocked(key)){
+    window.open(sub.href,'_blank');
+    return;
+  }
+  _pendingLock={sectionId,idx,href:sub.href,key};
+  document.getElementById('lock-item-name').textContent=sub.name;
+  document.getElementById('lock-pw-input').value='';
+  document.getElementById('lock-pw-error').classList.remove('show');
+  document.getElementById('lock-overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('lock-pw-input').focus(),80);
+  _pendingLockSubIdx=sidx;
+}
+let _pendingLockSubIdx=null;
 function closeLockModal(){
   document.getElementById('lock-overlay').classList.remove('open');
 }
@@ -839,12 +901,14 @@ async function submitLockPassword(){
   const err=document.getElementById('lock-pw-error');
   err.classList.remove('show');
   if(!val){err.textContent='Password tidak boleh kosong.';err.classList.add('show');return;}
-  const item=appData.sections.find(s=>s.id===_pendingLock.sectionId).items[_pendingLock.idx];
+  let item=appData.sections.find(s=>s.id===_pendingLock.sectionId).items[_pendingLock.idx];
+  if(_pendingLockSubIdx!==null){ item=(item.subItems||[])[_pendingLockSubIdx]; }
   const hash=await sha256Hex(val);
   if(item&&hash===item.passwordHash){
     markItemUnlocked(_pendingLock.key);
     closeLockModal();
     window.open(_pendingLock.href,'_blank');
+    _pendingLockSubIdx=null;
   }else{
     err.textContent='Password salah. Coba lagi.';
     err.classList.add('show');
@@ -1044,6 +1108,14 @@ async function migrateParsedData(parsed){
   if(typeof parsed.adminPasswordHash!=='string') parsed.adminPasswordHash=DEFAULTS.adminPasswordHash;
   if(typeof parsed.adminRecoveryHash!=='string') parsed.adminRecoveryHash=DEFAULTS.adminRecoveryHash;
   if(!Array.isArray(parsed.sections)) parsed.sections=JSON.parse(JSON.stringify(DEFAULTS.sections));
+  // migrasi: pastikan tiap menu punya array subItems (sub menu)
+  parsed.sections.forEach(sec=>{
+    if(Array.isArray(sec.items)){
+      sec.items.forEach(it=>{
+        if(!Array.isArray(it.subItems)) it.subItems=[];
+      });
+    }
+  });
   return parsed;
 }
 
@@ -1347,6 +1419,33 @@ function renderMain(){
       <div class="grid" id="grid-${s.id}">
         ${s.items.map((item,idx)=>{
           if(item.visible===false) return '';
+          const subItems=Array.isArray(item.subItems)?item.subItems:[];
+          const visibleSub=subItems.filter(si=>si.visible!==false);
+          if(visibleSub.length>0){
+            return `
+            <div class="card-wrap" id="cardwrap-${s.id}-${idx}">
+              <div class="card card-toggle" onclick="toggleCardSub('${s.id}',${idx})">
+                <span class="card-icon" style="background:var(--${s.color}-soft);">
+                  <i class="ti ti-${item.icon}" style="color:var(--${s.color});"></i>
+                </span>
+                <span class="card-name">${item.name}</span>
+                <span class="card-arrow card-chevron"><i class="ti ti-chevron-down"></i></span>
+              </div>
+              <div class="sub-list">
+                ${visibleSub.map((si,sidx)=>{
+                  const realIdx=subItems.indexOf(si);
+                  return `
+                  <a class="sub-card" ${si.locked?`href="javascript:void(0)" onclick="requestUnlockSub(this)"`:`href="${si.href}" target="_blank" rel="noopener"`} data-section="${s.id}" data-idx="${idx}" data-sidx="${realIdx}">
+                    <i class="ti ti-${si.icon}"></i>
+                    <span class="sub-card-name">${si.name}</span>
+                    ${si.locked?'<span class="sub-card-lock"><i class="ti ti-lock"></i></span>':''}
+                  </a>
+                `;
+                }).join('')}
+              </div>
+            </div>
+          `;
+          }
           return `
           <a class="card" ${item.locked?`href="javascript:void(0)" onclick="requestUnlock(this)"`:`href="${item.href}" target="_blank" rel="noopener"`} data-section="${s.id}" data-idx="${idx}">
             <span class="card-icon" style="background:var(--${s.color}-soft);">
@@ -1362,10 +1461,18 @@ function renderMain(){
   `).join('');
 }
 
+function toggleCardSub(sectionId,idx){
+  const el=document.getElementById('cardwrap-'+sectionId+'-'+idx);
+  if(!el) return;
+  document.querySelectorAll('.card-wrap.open').forEach(w=>{ if(w!==el) w.classList.remove('open'); });
+  el.classList.toggle('open');
+}
+
 /* =============================================
    RENDER ADMIN
    ============================================= */
 let activeAdminTab='password';
+let openSubPanels=new Set(); // keys "sectionId::idx" whose sub-menu manager is expanded
 function renderAdmin(){
   // tabs
   const tabs=document.getElementById('admin-tabs');
@@ -1408,13 +1515,17 @@ function renderAdmin(){
         </div>
       </div>
       ${s.items.length===0?`<div class="empty-state"><i class="ti ti-inbox" style="font-size:28px;display:block;margin-bottom:8px;"></i>Belum ada menu</div>`:''}
-      ${s.items.map((item,idx)=>`
+      ${s.items.map((item,idx)=>{
+        const subItems=Array.isArray(item.subItems)?item.subItems:[];
+        const subKey=s.id+'::'+idx;
+        const subOpen=openSubPanels.has(subKey);
+        return `
         <div class="item-row${item.visible===false?' item-row-hidden':''}">
           <div class="item-row-icon" style="background:var(--${s.color}-soft);">
             <i class="ti ti-${item.icon}" style="color:var(--${s.color});"></i>
           </div>
           <div class="item-row-info">
-            <div class="item-row-name">${item.locked?'<i class="ti ti-lock"></i>':''}${item.name}${item.visible===false?' <span class="item-row-badge">Disembunyikan</span>':''}</div>
+            <div class="item-row-name">${item.locked?'<i class="ti ti-lock"></i>':''}${item.name}${item.visible===false?' <span class="item-row-badge">Disembunyikan</span>':''}${subItems.length?` <span class="sub-count-badge">${subItems.length} sub</span>`:''}</div>
             <div class="item-row-url">${item.href}</div>
           </div>
           <div class="item-row-actions">
@@ -1427,6 +1538,9 @@ function renderAdmin(){
             <button class="row-btn" onclick="toggleItemVisible('${s.id}',${idx})" title="${item.visible===false?'Tampilkan di dashboard':'Sembunyikan dari dashboard'}">
               <i class="ti ti-${item.visible===false?'eye-off':'eye'}"></i>
             </button>
+            <button class="row-btn" onclick="toggleSubPanel('${s.id}',${idx})" title="Kelola Sub Menu">
+              <i class="ti ti-corner-down-right"></i>
+            </button>
             <button class="row-btn" onclick="openModal('${s.id}',${idx})" title="Edit">
               <i class="ti ti-pencil"></i>
             </button>
@@ -1435,7 +1549,42 @@ function renderAdmin(){
             </button>
           </div>
         </div>
-      `).join('')}
+        ${subOpen?`
+        <div class="sub-admin-panel">
+          ${subItems.length===0?`<div class="empty-state-sm">Belum ada sub menu</div>`:''}
+          ${subItems.map((si,sidx)=>`
+            <div class="sub-item-row">
+              <div class="sub-item-row-icon"><i class="ti ti-${si.icon}"></i></div>
+              <div class="sub-item-row-info">
+                <div class="sub-item-row-name">${si.locked?'<i class="ti ti-lock"></i> ':''}${si.name}${si.visible===false?' <span class="item-row-badge">Disembunyikan</span>':''}</div>
+                <div class="sub-item-row-url">${si.href}</div>
+              </div>
+              <div class="sub-item-row-actions">
+                <button class="row-btn-sm" onclick="moveSubItem('${s.id}',${idx},${sidx},-1)" ${sidx===0?'disabled':''} title="Pindah ke atas">
+                  <i class="ti ti-chevron-up"></i>
+                </button>
+                <button class="row-btn-sm" onclick="moveSubItem('${s.id}',${idx},${sidx},1)" ${sidx===subItems.length-1?'disabled':''} title="Pindah ke bawah">
+                  <i class="ti ti-chevron-down"></i>
+                </button>
+                <button class="row-btn-sm" onclick="toggleSubItemVisible('${s.id}',${idx},${sidx})" title="${si.visible===false?'Tampilkan':'Sembunyikan'}">
+                  <i class="ti ti-${si.visible===false?'eye-off':'eye'}"></i>
+                </button>
+                <button class="row-btn-sm" onclick="openModal('${s.id}',${sidx},${idx})" title="Edit Sub Menu">
+                  <i class="ti ti-pencil"></i>
+                </button>
+                <button class="row-btn-sm del" onclick="confirmDelete('${s.id}',${sidx},${idx})" title="Hapus Sub Menu">
+                  <i class="ti ti-trash"></i>
+                </button>
+              </div>
+            </div>
+          `).join('')}
+          <button class="btn btn-ghost btn-sm" onclick="openModal('${s.id}',null,${idx})">
+            <i class="ti ti-plus"></i> Tambah Sub Menu
+          </button>
+        </div>
+        `:''}
+      `;
+      }).join('')}
     </div>
   `).join('');
 
@@ -1464,6 +1613,35 @@ function switchTab(tab){
 function toggleItemVisible(sectionId,idx){
   const item=appData.sections.find(s=>s.id===sectionId).items[idx];
   item.visible=item.visible===false;
+  saveData();
+  renderAdmin();
+}
+
+/* =============================================
+   SUB MENU (admin helpers)
+   ============================================= */
+function toggleSubPanel(sectionId,idx){
+  const key=sectionId+'::'+idx;
+  if(openSubPanels.has(key)) openSubPanels.delete(key);
+  else openSubPanels.add(key);
+  renderAdmin();
+}
+function toggleSubItemVisible(sectionId,idx,sidx){
+  const item=appData.sections.find(s=>s.id===sectionId).items[idx];
+  if(!Array.isArray(item.subItems)) return;
+  const sub=item.subItems[sidx];
+  sub.visible=sub.visible===false;
+  saveData();
+  renderAdmin();
+}
+function moveSubItem(sectionId,idx,sidx,direction){
+  const item=appData.sections.find(s=>s.id===sectionId).items[idx];
+  if(!Array.isArray(item.subItems)) return;
+  const newIdx=sidx+direction;
+  if(newIdx<0||newIdx>=item.subItems.length) return;
+  const tmp=item.subItems[sidx];
+  item.subItems[sidx]=item.subItems[newIdx];
+  item.subItems[newIdx]=tmp;
   saveData();
   renderAdmin();
 }
@@ -1587,17 +1765,28 @@ async function submitRecovery(){
 /* =============================================
    MODAL (add / edit item)
    ============================================= */
-function openModal(sectionId, idx){
+function getItemArray(sectionId,parentIdx){
+  const sec=appData.sections.find(s=>s.id===sectionId);
+  if(parentIdx===null||parentIdx===''||parentIdx===undefined) return sec.items;
+  const parent=sec.items[parentIdx];
+  if(!Array.isArray(parent.subItems)) parent.subItems=[];
+  return parent.subItems;
+}
+
+function openModal(sectionId, idx, parentIdx){
+  parentIdx=(parentIdx===undefined)?null:parentIdx;
   document.getElementById('modal-section').value=sectionId;
   document.getElementById('modal-idx').value=idx===null?'':idx;
+  document.getElementById('modal-parent-idx').value=parentIdx===null?'':parentIdx;
   const isEdit=idx!==null;
-  document.getElementById('modal-title').textContent=isEdit?'Edit Menu':'Tambah Menu';
+  const isSub=parentIdx!==null;
+  document.getElementById('modal-title').textContent=isSub?(isEdit?'Edit Sub Menu':'Tambah Sub Menu'):(isEdit?'Edit Menu':'Tambah Menu');
   document.getElementById('modal-del-btn').style.display=isEdit?'':'none';
   document.getElementById('modal-item-password').value='';
   document.getElementById('modal-pw-error').classList.remove('show');
 
   if(isEdit){
-    const item=appData.sections.find(s=>s.id===sectionId).items[idx];
+    const item=getItemArray(sectionId,parentIdx)[idx];
     document.getElementById('modal-name').value=item.name;
     document.getElementById('modal-url').value=item.href;
     document.getElementById('modal-icon').value=item.icon;
@@ -1651,6 +1840,8 @@ function setIconPreview(icon,sectionId){
 async function saveItem(){
   const sectionId=document.getElementById('modal-section').value;
   const idxRaw=document.getElementById('modal-idx').value;
+  const parentRaw=document.getElementById('modal-parent-idx').value;
+  const parentIdx=parentRaw===''?null:parseInt(parentRaw);
   const name=document.getElementById('modal-name').value.trim();
   const href=document.getElementById('modal-url').value.trim();
   const icon=document.getElementById('modal-icon').value.trim()||'link';
@@ -1661,8 +1852,8 @@ async function saveItem(){
   pwErr.classList.remove('show');
   if(!name||!href){alert('Nama dan URL wajib diisi.');return;}
 
-  const sec=appData.sections.find(s=>s.id===sectionId);
-  const existing=idxRaw===''?null:sec.items[parseInt(idxRaw)];
+  const arr=getItemArray(sectionId,parentIdx);
+  const existing=idxRaw===''?null:arr[parseInt(idxRaw)];
   let passwordHash=existing?existing.passwordHash:undefined;
 
   if(locked){
@@ -1677,10 +1868,12 @@ async function saveItem(){
   }
 
   const newItem={name,href,icon,visible,locked,passwordHash};
+  if(parentIdx===null) newItem.subItems=existing&&Array.isArray(existing.subItems)?existing.subItems:[];
   if(idxRaw===''){
-    sec.items.push(newItem);
+    arr.push(newItem);
+    if(parentIdx!==null) openSubPanels.add(sectionId+'::'+parentIdx);
   }else{
-    sec.items[parseInt(idxRaw)]=newItem;
+    arr[parseInt(idxRaw)]=newItem;
   }
   saveData();
   closeModal();
@@ -1690,8 +1883,10 @@ async function saveItem(){
 function deleteItemFromModal(){
   const sectionId=document.getElementById('modal-section').value;
   const idx=parseInt(document.getElementById('modal-idx').value);
+  const parentRaw=document.getElementById('modal-parent-idx').value;
+  const parentIdx=parentRaw===''?null:parseInt(parentRaw);
   closeModal();
-  confirmDelete(sectionId,idx);
+  confirmDelete(sectionId,idx,parentIdx);
 }
 
 function moveItem(sectionId,idx,direction){
@@ -1710,20 +1905,21 @@ function moveItem(sectionId,idx,direction){
    CONFIRM DELETE (menu item)
    ============================================= */
 let _pendingDelete=null;
-function confirmDelete(sectionId,idx){
-  const sec=appData.sections.find(s=>s.id===sectionId);
-  const item=sec.items[idx];
+function confirmDelete(sectionId,idx,parentIdx){
+  parentIdx=(parentIdx===undefined)?null:parentIdx;
+  const arr=getItemArray(sectionId,parentIdx);
+  const item=arr[idx];
   document.getElementById('confirm-title').textContent='Hapus "'+item.name+'"?';
-  document.getElementById('confirm-msg').textContent='Menu ini akan dihapus permanen dan tidak bisa dikembalikan.';
-  _pendingDelete={sectionId,idx};
+  document.getElementById('confirm-msg').textContent=parentIdx===null?'Menu ini akan dihapus permanen dan tidak bisa dikembalikan.':'Sub menu ini akan dihapus permanen dan tidak bisa dikembalikan.';
+  _pendingDelete={sectionId,idx,parentIdx};
   document.getElementById('confirm-ok-btn').onclick=doDelete;
   document.getElementById('confirm-overlay').classList.add('open');
 }
 function doDelete(){
   if(!_pendingDelete)return;
-  const {sectionId,idx}=_pendingDelete;
-  const sec=appData.sections.find(s=>s.id===sectionId);
-  sec.items.splice(idx,1);
+  const {sectionId,idx,parentIdx}=_pendingDelete;
+  const arr=getItemArray(sectionId,parentIdx);
+  arr.splice(idx,1);
   saveData();
   closeConfirm();
   renderAdmin();

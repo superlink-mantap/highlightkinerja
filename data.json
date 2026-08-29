@@ -330,6 +330,14 @@
               "visible": true,
               "locked": true,
               "passwordHash": "ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78"
+            },
+            {
+              "name": "TEMPLATE HUT",
+              "href": "https://docs.google.com/spreadsheets/d/13Dn7PE4B96REfr_5ZGJvBG0AGj9Z8YV2QU3dk3USuMM/edit?usp=drive_link",
+              "icon": "link",
+              "visible": true,
+              "locked": true,
+              "passwordHash": "ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78"
             }
           ]
         }

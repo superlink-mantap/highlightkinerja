@@ -163,7 +163,7 @@
           "subItems": []
         },
         {
-          "name": "SLIK Analyzer",
+          "name": "Analyzer",
           "href": "https://superlink-mantap.github.io/slikanalyzer/",
           "icon": "file-search",
           "visible": true,

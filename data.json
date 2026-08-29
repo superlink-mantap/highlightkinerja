@@ -81,6 +81,13 @@
               "icon": "link",
               "visible": true,
               "locked": false
+            },
+            {
+              "name": "KONSOLIDASI",
+              "href": "https://drive.google.com/drive/folders/1U3VFl34fWaERCTCBwqZRBUTU3V8JRMd1?usp=drive_link",
+              "icon": "link",
+              "visible": true,
+              "locked": false
             }
           ]
         },

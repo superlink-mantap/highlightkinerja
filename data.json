@@ -338,6 +338,14 @@
               "visible": true,
               "locked": true,
               "passwordHash": "ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78"
+            },
+            {
+              "name": "INTERNET / INTRANET",
+              "href": "https://docs.google.com/spreadsheets/d/1h5wFmTYUJyhqACxGujeuALZxcn-QrEN32a5bcaBtlmE/edit?usp=drive_link",
+              "icon": "link",
+              "visible": true,
+              "locked": true,
+              "passwordHash": "ac0e7d037817094e9e0b4441f9bae3209d67b02fa484917065f71b16109a1a78"
             }
           ]
         }

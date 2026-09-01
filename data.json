@@ -25,7 +25,7 @@
           "name": "Quick Count Keragaan",
           "href": "https://docs.google.com/spreadsheets/d/1-NpgMSGFmbo0Rn6m2aPJCvSNzELYma-tZZJv3pf4aAE/edit?usp=sharing",
           "icon": "chart-dots-3",
-          "visible": true,
+          "visible": false,
           "locked": false,
           "subItems": []
         },

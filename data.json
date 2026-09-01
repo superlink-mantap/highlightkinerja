@@ -22,6 +22,14 @@
           "subItems": []
         },
         {
+          "name": "Monitoring Weekly",
+          "href": "https://docs.google.com/spreadsheets/d/1cnemdGkvIMUH8h4ROe_cbbcRoI9Kgft0zHeBc4DseeE/edit?usp=sharing",
+          "icon": "screen-share",
+          "visible": true,
+          "locked": false,
+          "subItems": []
+        },
+        {
           "name": "Data Keragaan Agustus",
           "href": "https://docs.google.com/spreadsheets/d/10Uk8zVlZJUeHzKJUHEsk6069WS4A2Hia_hQxJGJ3Xbc/edit?usp=drive_link",
           "icon": "calendar-stats",
@@ -33,14 +41,6 @@
           "name": "Data Keragaan Juli",
           "href": "https://docs.google.com/spreadsheets/d/18V_938cFvgaEN8EbNqd7vvbSWDmh-8eAsp7ioxcvmrk/edit?usp=drive_link",
           "icon": "calendar-event",
-          "visible": true,
-          "locked": false,
-          "subItems": []
-        },
-        {
-          "name": "Monitoring Weekly",
-          "href": "https://docs.google.com/spreadsheets/d/1cnemdGkvIMUH8h4ROe_cbbcRoI9Kgft0zHeBc4DseeE/edit?usp=sharing",
-          "icon": "screen-share",
           "visible": true,
           "locked": false,
           "subItems": []

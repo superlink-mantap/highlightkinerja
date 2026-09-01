@@ -38,6 +38,14 @@
           "subItems": []
         },
         {
+          "name": "Monitoring Weekly",
+          "href": "https://docs.google.com/spreadsheets/d/1cnemdGkvIMUH8h4ROe_cbbcRoI9Kgft0zHeBc4DseeE/edit?usp=sharing",
+          "icon": "screen-share",
+          "visible": true,
+          "locked": false,
+          "subItems": []
+        },
+        {
           "name": "Breakdown RKA",
           "href": "https://docs.google.com/spreadsheets/d/1uyD0rFTni6WqCrskbzlwPjNgZlTM6bJP-fhrTVkMyFo/edit?usp=sharing",
           "icon": "report-analytics",
@@ -57,14 +65,6 @@
           "name": "Market Share",
           "href": "https://drive.google.com/drive/folders/1aSDLfKfZYdosqVTxxt2bLsYgKyXhDDIQ?usp=drive_link",
           "icon": "chart-pie",
-          "visible": true,
-          "locked": false,
-          "subItems": []
-        },
-        {
-          "name": "Monitoring Weekly",
-          "href": "https://docs.google.com/spreadsheets/d/1cnemdGkvIMUH8h4ROe_cbbcRoI9Kgft0zHeBc4DseeE/edit?usp=sharing",
-          "icon": "screen-share",
           "visible": true,
           "locked": false,
           "subItems": []

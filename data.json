@@ -98,6 +98,14 @@
           "visible": true,
           "locked": false,
           "subItems": []
+        },
+        {
+          "name": "Monitoring Weekly",
+          "href": "https://docs.google.com/spreadsheets/d/1cnemdGkvIMUH8h4ROe_cbbcRoI9Kgft0zHeBc4DseeE/edit?usp=sharing",
+          "icon": "screen-share",
+          "visible": true,
+          "locked": false,
+          "subItems": []
         }
       ]
     },

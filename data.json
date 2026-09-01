@@ -62,6 +62,14 @@
           "subItems": []
         },
         {
+          "name": "Monitoring Weekly",
+          "href": "https://docs.google.com/spreadsheets/d/1cnemdGkvIMUH8h4ROe_cbbcRoI9Kgft0zHeBc4DseeE/edit?usp=sharing",
+          "icon": "screen-share",
+          "visible": true,
+          "locked": false,
+          "subItems": []
+        },
+        {
           "name": "Almafact",
           "href": "https://drive.google.com/drive/folders/1qj1iVdQC-MzirzoQUvQhywqiX6ZGh6vA?usp=drive_link",
           "icon": "database-search",
@@ -95,14 +103,6 @@
           "name": "Laba Rugi",
           "href": "https://docs.google.com/spreadsheets/d/1z_KvScRlEOCi0d34B7gqP-aohgPv8JqW75AW_aeDZ3o/edit?usp=drive_link",
           "icon": "cash",
-          "visible": true,
-          "locked": false,
-          "subItems": []
-        },
-        {
-          "name": "Monitoring Weekly",
-          "href": "https://docs.google.com/spreadsheets/d/1cnemdGkvIMUH8h4ROe_cbbcRoI9Kgft0zHeBc4DseeE/edit?usp=sharing",
-          "icon": "screen-share",
           "visible": true,
           "locked": false,
           "subItems": []

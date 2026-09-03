@@ -30,7 +30,7 @@
           "subItems": []
         },
         {
-          "name": "Data Keragaan Agustus",
+          "name": "Data Keragaan September",
           "href": "https://docs.google.com/spreadsheets/d/10Uk8zVlZJUeHzKJUHEsk6069WS4A2Hia_hQxJGJ3Xbc/edit?usp=drive_link",
           "icon": "calendar-stats",
           "visible": true,
@@ -321,13 +321,6 @@
           "visible": true,
           "locked": false,
           "subItems": [
-            {
-              "name": "PIPELINE HARIAN IT",
-              "href": "https://bri2.sharepoint.com/:x:/s/RegionalOffice12Surabaya/IQCbA3xxBhpxTLLp8CIpTNq0ASAKValuGsgSeNd6zD58wq0?e=DFf8XI",
-              "icon": "link",
-              "visible": true,
-              "locked": false
-            },
             {
               "name": "FORM DAILY ACTIVITY IT",
               "href": "https://docs.google.com/forms/d/e/1FAIpQLSfKyRko1xS7JOlyzwOwVYkUEUzx6xa31TRKSEZgKA5EtdQtyg/viewform",

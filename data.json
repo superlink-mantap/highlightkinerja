@@ -345,6 +345,13 @@
               "passwordHash": "c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646"
             },
             {
+              "name": "PIPELINE HARIAN IT",
+              "href": "https://bri2.sharepoint.com/:x:/s/RegionalOffice12Surabaya/IQCbA3xxBhpxTLLp8CIpTNq0ASAKValuGsgSeNd6zD58wq0?e=DFf8XI",
+              "icon": "link",
+              "visible": true,
+              "locked": false
+            },
+            {
               "name": "CRM / ATM",
               "href": "https://docs.google.com/spreadsheets/d/1UC7mUTE3Pw8OjCi9xLgJapLrZNumnysnuUFtlxI1kJI/edit?usp=drive_link",
               "icon": "link",
@@ -359,13 +366,6 @@
               "visible": true,
               "locked": true,
               "passwordHash": "c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646"
-            },
-            {
-              "name": "PIPELINE HARIAN IT",
-              "href": "https://bri2.sharepoint.com/:x:/s/RegionalOffice12Surabaya/IQCbA3xxBhpxTLLp8CIpTNq0ASAKValuGsgSeNd6zD58wq0?e=DFf8XI",
-              "icon": "link",
-              "visible": true,
-              "locked": false
             },
             {
               "name": "EDC UKO - NOP",

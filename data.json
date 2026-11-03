@@ -368,6 +368,13 @@
               "passwordHash": "c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646"
             },
             {
+              "name": "IT HEALTH CHECK ENDPOINT",
+              "href": "https://bri2-my.sharepoint.com/:f:/g/personal/00154182_hq_bri_co_id/IgB-KntmUG6IR6R9ga1nyNDrAYTpI5f2a0X52W6nis17XpE?e=URgDnZ",
+              "icon": "link",
+              "visible": true,
+              "locked": false
+            },
+            {
               "name": "EDC MERCHANT - NOP",
               "href": "https://docs.google.com/spreadsheets/d/1qV-BgtK9KgWddZ_imkj5vvfoJyN2fTHomi-LboGGFR8/edit?usp=sharing",
               "icon": "link",
@@ -390,13 +397,6 @@
               "visible": true,
               "locked": true,
               "passwordHash": "c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646"
-            },
-            {
-              "name": "IT HEALTH CHECK ENDPOINT",
-              "href": "https://bri2-my.sharepoint.com/:f:/g/personal/00154182_hq_bri_co_id/IgB-KntmUG6IR6R9ga1nyNDrAYTpI5f2a0X52W6nis17XpE?e=URgDnZ",
-              "icon": "link",
-              "visible": true,
-              "locked": false
             },
             {
               "name": "INTERNET / INTRANET",

@@ -306,15 +306,6 @@
           "subItems": []
         },
         {
-          "name": "Data Bulanan",
-          "href": "https://drive.google.com/drive/folders/1DcOxCbQ93uQyWIQ1Y7qmh_7RFkX_OKQz?usp=drive_link",
-          "icon": "link",
-          "visible": true,
-          "locked": true,
-          "passwordHash": "c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646",
-          "subItems": []
-        },
-        {
           "name": "IT",
           "href": "https://drive.google.com/drive/folders/1pkp30ch6_BxhcHyjzCaaqOTU0U0FPtPS?usp=sharing",
           "icon": "link",
@@ -408,6 +399,15 @@
               "passwordHash": "c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646"
             }
           ]
+        },
+        {
+          "name": "Data Bulanan",
+          "href": "https://drive.google.com/drive/folders/1DcOxCbQ93uQyWIQ1Y7qmh_7RFkX_OKQz?usp=drive_link",
+          "icon": "link",
+          "visible": true,
+          "locked": true,
+          "passwordHash": "c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646",
+          "subItems": []
         }
       ]
     }

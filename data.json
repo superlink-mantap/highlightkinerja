@@ -323,7 +323,7 @@
           "subItems": [
             {
               "name": "IT  TASK LIST",
-              "href": "https://script.google.com/macros/s/AKfycbzjMudQfwnnahEW3Fj0G4JFdQuVJOpu-DB27gvFW7msGm2qHC6KFIAQNMvOf1HxDWSf/exec",
+              "href": "https://monitoring-it-mu.vercel.app/",
               "icon": "link",
               "visible": true,
               "locked": false
